@@ -8,15 +8,73 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character2D",
+"language": "GDScript",
+"path": "res://base_scripts/character2d.gd"
+}, {
+"base": "Character2D",
+"class": "ClassicCharacter2D",
+"language": "GDScript",
+"path": "res://base_scripts/classic_character_2d.gd"
+}, {
+"base": "Reference",
+"class": "Damageable",
+"language": "GDScript",
+"path": "res://combat_scripts/damageable.gd"
+}, {
+"base": "Node",
+"class": "FaceMovement2D",
+"language": "GDScript",
+"path": "res://base_scripts/face_movement_2d.gd"
+}, {
+"base": "Node",
+"class": "MovementInput2D",
+"language": "GDScript",
+"path": "res://base_scripts/movement_input_2d.gd"
+}, {
+"base": "Reference",
+"class": "NodeSight",
+"language": "GDScript",
+"path": "res://ai/node_sight.gd"
+} ]
 _global_script_class_icons={
-
+"Character2D": "",
+"ClassicCharacter2D": "",
+"Damageable": "",
+"FaceMovement2D": "",
+"MovementInput2D": "",
+"NodeSight": ""
 }
 
 [application]
 
 config/name="Hanno"
 config/icon="res://icon.png"
+
+[input]
+
+"move right"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+"move down"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+"move up"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+"move left"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [rendering]
 
