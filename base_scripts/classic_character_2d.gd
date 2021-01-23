@@ -6,7 +6,6 @@ extends Character2D
 
 export(float, 0, 1000) var acceleration_weight := 12.0			# weight used to interpolate velocity to the movement vector
 export(float, 0, 1000) var brake_weight := 18.0					# weight used to interpolate velocity to 0
-export(float, 0, 1000) var air_weight := 2.0					# weight used to interpolate air velocity
 
 
 func _integrate_movement(vector: Vector2, delta: float) -> Vector2:
