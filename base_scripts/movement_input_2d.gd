@@ -26,7 +26,7 @@ func _process(_delta):
 #		movement_vector *= fast_speed
 #
 #	else:
-#		movement_vector *= default_speed
+	movement_vector *= default_speed
 	
 	if is_instance_valid(basis_node):
 		get_parent().movement_vector = basis_node.global_transform.basis_xform(movement_vector)

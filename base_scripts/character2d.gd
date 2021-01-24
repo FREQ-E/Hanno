@@ -15,7 +15,7 @@ func _integrate_movement(vector: Vector2, _delta: float) -> Vector2:
 	# this is mainly used to determine how the movement_vector affects the linear_velocity
 	# right now this will only allow the character to move when it is on the ground
 	# linear_velocity should not be set in this function
-	return linear_velocity
+	return vector
 
 
 func _physics_process(delta: float):

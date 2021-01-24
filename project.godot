@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://combat_scripts/damageable.gd"
 }, {
 "base": "Node",
+"class": "EnemyFlag",
+"language": "GDScript",
+"path": "res://actors/enemy_flag.gd"
+}, {
+"base": "Node",
 "class": "FaceMovement2D",
 "language": "GDScript",
 "path": "res://base_scripts/face_movement_2d.gd"
@@ -33,6 +38,11 @@ _global_script_classes=[ {
 "class": "MovementInput2D",
 "language": "GDScript",
 "path": "res://base_scripts/movement_input_2d.gd"
+}, {
+"base": "Node",
+"class": "NodeFlag",
+"language": "GDScript",
+"path": "res://actors/node_flag.gd"
 }, {
 "base": "RayCast2D",
 "class": "NodeSight",
@@ -43,14 +53,17 @@ _global_script_class_icons={
 "Character2D": "",
 "ClassicCharacter2D": "",
 "Damageable": "",
+"EnemyFlag": "",
 "FaceMovement2D": "",
 "MovementInput2D": "",
+"NodeFlag": "",
 "NodeSight": ""
 }
 
 [application]
 
 config/name="Hanno"
+run/main_scene="res://levels/test/test.tscn"
 config/icon="res://icon.png"
 
 [autoload]

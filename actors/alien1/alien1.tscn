@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
+[ext_resource path="res://actors/alien1/Possible_Alien.png" type="Texture" id=2]
+[ext_resource path="res://actors/enemy_flag.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 74.5677
+height = 108.389
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends NodeSight
+
+
+func _ready():
+	connect(\"triggered\", self, \"_handle_triggered\")
+	connect(\"untriggered\", self, \"_handle_untriggered\")
+
+
+func _handle_triggered() -> void:
+	print(target.name, \"sighted\")
+
+
+func _handle_untriggered() -> void:
+	print(target.name, \"unsighted\")
+"
+
+[node name="Alien1" type="KinematicBody2D"]
+collision_layer = 4
+script = ExtResource( 1 )
+
+[node name="Possible_Alien" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="NodeSight" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 3
+script = SubResource( 2 )
+
+[node name="EnemyFlag" type="Node" parent="."]
+script = ExtResource( 3 )
