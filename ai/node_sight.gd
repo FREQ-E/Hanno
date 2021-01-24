@@ -1,15 +1,16 @@
+# A raycast node which constantly tries to cast to the target
 class_name NodeSight
 extends RayCast2D
 
 
-signal triggered
-signal untriggered
+signal triggered			# emitted as soon as the target is hit and in range
+signal untriggered			# emitted as soon as the target falls out of sight/range
 
-export var target_path: NodePath = "Player"
-export var max_distance := 3000.0
+export var target_path: NodePath = "Player"		# the path to the target (leave at "Player" to use GlobalData.player)
+export var max_distance := 3000.0				# the maximum distance the raycast will cast to
 
-var target: Node2D
-var target_visible := false
+var target: Node2D							# the node this raycast will cast to
+var target_visible := false					# true if the target node is in range and in sight
 
 
 func _ready():
@@ -28,10 +29,8 @@ func get_collision_vector() -> Vector2:
 
 
 func _process(_delta):
-	var player := GlobalData.player
-	
-	if is_instance_valid(player):
-		if get_collider() == player and get_collision_vector().length() <= max_distance:
+	if is_instance_valid(target):
+		if get_collider() == target:
 			if not target_visible:
 				emit_signal("triggered")
 			
@@ -43,7 +42,7 @@ func _process(_delta):
 			
 			target_visible = false
 		
-		cast_to = to_local(player.global_transform.origin)
+		cast_to = to_local(target.global_transform.origin).clamped(max_distance)
 	
 	else:
 		if target_visible:
