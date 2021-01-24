@@ -13,6 +13,7 @@ script/source = "extends NodeSight
 
 
 func _ready():
+	# warning-ignore-all:return_value_discarded
 	connect(\"triggered\", self, \"_handle_triggered\")
 	connect(\"untriggered\", self, \"_handle_untriggered\")
 
