@@ -7,12 +7,12 @@ signal dashed
 signal undashed
 
 
-export var fast_speed := 10.0
-export var default_speed := 5.0
+export var fast_speed := 30.0
+export var default_speed := 3.0
 
-export var dash_speed := 20.0					# the speed the character travels during the dash
-export var dash_duration := 0.1					# how long the dash lasts
-export var dash_buffer := 0.2					# the window of time available in which sprint can be pressed and released to trigger the dash
+export var dash_speed := 10.0					# the speed the character travels during the dash
+export var dash_duration := 0.05					# how long the dash lasts
+export var dash_buffer := 0.1					# the window of time available in which sprint can be pressed and released to trigger the dash
 
 export var basis_node_path: NodePath			# If given, the user input will be transformed to be relative to the node given
 
