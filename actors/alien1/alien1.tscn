@@ -5,8 +5,8 @@
 [ext_resource path="res://actors/enemy_flag.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 74.5677
-height = 108.389
+radius = 35.524
+height = 60.334
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends NodeSight
@@ -30,6 +30,7 @@ collision_layer = 4
 script = ExtResource( 1 )
 
 [node name="Possible_Alien" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

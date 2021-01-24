@@ -52,15 +52,15 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 75.0
-height = 90.0
+radius = 38.5625
+height = 49.4777
 
 [node name="Player1" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
 
 [node name="CharacterAnimator" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.15, 0.15 )
+scale = Vector2( 0.075, 0.075 )
 frames = SubResource( 11 )
 playing = true
 script = ExtResource( 5 )
