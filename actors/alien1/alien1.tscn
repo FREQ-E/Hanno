@@ -18,11 +18,11 @@ func _ready():
 
 
 func _handle_triggered() -> void:
-	print(target.name, \"sighted\")
+	prints(target.name, \"sighted\")
 
 
 func _handle_untriggered() -> void:
-	print(target.name, \"unsighted\")
+	prints(target.name, \"unsighted\")
 "
 
 [node name="Alien1" type="KinematicBody2D"]
