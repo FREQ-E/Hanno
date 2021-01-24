@@ -53,6 +53,10 @@ _global_script_class_icons={
 config/name="Hanno"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalData="*res://global_data.gd"
+
 [input]
 
 "move right"={

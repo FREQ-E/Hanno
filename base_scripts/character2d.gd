@@ -3,7 +3,7 @@ class_name Character2D
 extends KinematicBody2D
 
 
-# The speed and direction this character is moving towards. Do not set this directly if snapped to floor, use apply_impulse
+# The speed and direction this character is moving towards
 var linear_velocity: Vector2
 
 # the speed and direction this character will move towards (in global space)
