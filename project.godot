@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "AnimatedSprite",
 "class": "CharacterAnimator",
 "language": "GDScript",
-"path": "res://actors/player1/character_animator.gd"
+"path": "res://actors/character_animator.gd"
 }, {
 "base": "Character2D",
 "class": "ClassicCharacter2D",

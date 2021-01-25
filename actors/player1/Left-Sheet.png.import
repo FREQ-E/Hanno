@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/walk_forward.png-459d3e1f3f026e48f4ac608f94797238.stex"
+path="res://.import/Left-Sheet.png-0abd327016c375e39daf8ac68f92c69a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/player1/walk_forward.png"
-dest_files=[ "res://.import/walk_forward.png-459d3e1f3f026e48f4ac608f94797238.stex" ]
+source_file="res://actors/player1/Left-Sheet.png"
+dest_files=[ "res://.import/Left-Sheet.png-0abd327016c375e39daf8ac68f92c69a.stex" ]
 
 [params]
 

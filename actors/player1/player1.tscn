@@ -1,77 +1,124 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://base_scripts/movement_input_2d.gd" type="Script" id=2]
 [ext_resource path="res://actors/node_flag.gd" type="Script" id=3]
-[ext_resource path="res://actors/player1/walk_forward.png" type="Texture" id=4]
-[ext_resource path="res://actors/player1/character_animator.gd" type="Script" id=5]
+[ext_resource path="res://actors/player1/Right-Sheet.png" type="Texture" id=4]
+[ext_resource path="res://actors/character_animator.gd" type="Script" id=5]
+[ext_resource path="res://actors/player1/Up-Sheet.png" type="Texture" id=6]
+[ext_resource path="res://actors/player1/Down-Sheet.png" type="Texture" id=7]
+[ext_resource path="res://actors/player1/Left-Sheet.png" type="Texture" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 2048, 2048 )
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 4 )
-region = Rect2( 2048, 0, 2048, 2048 )
+atlas = ExtResource( 8 )
+region = Rect2( 256, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 4 )
-region = Rect2( 4096, 0, 2048, 2048 )
+atlas = ExtResource( 8 )
+region = Rect2( 512, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 4 )
-region = Rect2( 6144, 0, 2048, 2048 )
+atlas = ExtResource( 8 )
+region = Rect2( 768, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 4 )
-region = Rect2( 8192, 0, 2048, 2048 )
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
-region = Rect2( 10240, 0, 2048, 2048 )
+atlas = ExtResource( 7 )
+region = Rect2( 256, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 4 )
-region = Rect2( 12288, 0, 2048, 2048 )
+atlas = ExtResource( 7 )
+region = Rect2( 512, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 4 )
-region = Rect2( 14336, 0, 2048, 2048 )
+atlas = ExtResource( 7 )
+region = Rect2( 768, 0, 256, 256 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 256, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 6 )
+region = Rect2( 512, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 6 )
+region = Rect2( 768, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 512, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 768, 0, 256, 256 )
+
+[sub_resource type="SpriteFrames" id=17]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
-"name": "default",
+"name": "walk_left",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "walk_forward",
+"name": "walk_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "walk_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "walk_right",
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 38.5625
-height = 49.4777
+[sub_resource type="CircleShape2D" id=18]
+radius = 32.9877
 
 [node name="Player1" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
 
 [node name="CharacterAnimator" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.075, 0.075 )
-frames = SubResource( 9 )
+position = Vector2( 0, -24.8345 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 17 )
+animation = "walk_up"
+frame = 1
 playing = true
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 10 )
+shape = SubResource( 18 )
 
 [node name="MovementInput2D" type="Node" parent="."]
 script = ExtResource( 2 )
 fast_speed = 1170.0
-default_speed = 770
+default_speed = 770.0
 dash_speed = 2000.0
 
 [node name="NodeFlag" type="Node" parent="."]
