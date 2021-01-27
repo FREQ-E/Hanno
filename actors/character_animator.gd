@@ -8,7 +8,7 @@ func _process(_delta):
 		frame = 1
 	
 	else:
-		var local: Vector2 = get_parent().global_transform.basis_xform_inv(get_parent().movement_vector)
+		var local: Vector2 = global_transform.basis_xform_inv(get_parent().movement_vector)
 		
 		if local.y > 0:
 			play("walk_down")
@@ -16,8 +16,8 @@ func _process(_delta):
 		elif local.y < 0:
 			play("walk_up")
 		
-		elif local.x > 0:
-			play("walk_right")
-		
 		else:
-			play("walk_left")
+			play("walk_side")
+			
+			if local.x < 0:
+				global_transform.x *= -1

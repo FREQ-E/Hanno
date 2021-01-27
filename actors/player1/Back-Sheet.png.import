@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Left-Sheet.png-0abd327016c375e39daf8ac68f92c69a.stex"
+path="res://.import/Back-Sheet.png-3b473785433c38fa69a91b6ca3ed6f1b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/player1/Left-Sheet.png"
-dest_files=[ "res://.import/Left-Sheet.png-0abd327016c375e39daf8ac68f92c69a.stex" ]
+source_file="res://actors/player1/Back-Sheet.png"
+dest_files=[ "res://.import/Back-Sheet.png-3b473785433c38fa69a91b6ca3ed6f1b.stex" ]
 
 [params]
 
