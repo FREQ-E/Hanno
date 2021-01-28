@@ -1,5 +1,5 @@
 # A raycast node which constantly tries to cast to the target
-class_name NodeSight
+class_name NodeSight2D
 extends RayCast2D
 
 

@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://actors/alien1/Possible_Alien.png" type="Texture" id=2]
 [ext_resource path="res://actors/enemy_flag.gd" type="Script" id=3]
+[ext_resource path="res://ai/wander2d.gd" type="Script" id=4]
+[ext_resource path="res://ai/goto.gd" type="Script" id=5]
+[ext_resource path="res://ai/trigger_untrigger.gd" type="Script" id=6]
+[ext_resource path="res://ai/agro2d.gd" type="Script" id=7]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 35.524
-height = 60.334
+[sub_resource type="CircleShape2D" id=1]
+radius = 37.2074
 
 [sub_resource type="GDScript" id=2]
-script/source = "extends NodeSight
+script/source = "extends NodeSight2D
 
 
 func _ready():
@@ -31,6 +34,7 @@ collision_layer = 4
 script = ExtResource( 1 )
 
 [node name="Possible_Alien" type="Sprite" parent="."]
+position = Vector2( 0, -27.3643 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
@@ -44,3 +48,16 @@ script = SubResource( 2 )
 
 [node name="EnemyFlag" type="Node" parent="."]
 script = ExtResource( 3 )
+
+[node name="Goto" type="Node" parent="."]
+script = ExtResource( 5 )
+enabled = true
+
+[node name="WanderAgro" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Wander2D" type="Node" parent="WanderAgro"]
+script = ExtResource( 4 )
+
+[node name="Agro2D" type="Node" parent="WanderAgro"]
+script = ExtResource( 7 )

@@ -1,15 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://levels/floor1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/alien1/alien1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/node_flag.gd" type="Script" id=4]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 800, 104, 810, 168, 745, 166, -10, -26, 945, -20, 939, 107, 373, 737, -14, 749, 367, 626, 491, 356, 494, 422, 427, 424, 672, 237, 671, 296, 553, 293, 744, 233, 424, 613, 543, 349 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 4, 5, 0 ), PoolIntArray( 6, 7, 3, 8 ), PoolIntArray( 9, 10, 11, 3 ), PoolIntArray( 12, 13, 14, 3 ), PoolIntArray( 2, 15, 12, 3 ), PoolIntArray( 11, 16, 8, 3 ), PoolIntArray( 9, 3, 14, 17 ) ]
+outlines = [ PoolVector2Array( -10, -26, -14, 749, 373, 737, 367, 626, 424, 613, 427, 424, 494, 422, 491, 356, 543, 349, 553, 293, 671, 296, 672, 237, 744, 233, 745, 166, 810, 168, 800, 104, 939, 107, 945, -20 ) ]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 16, 0, 0, 131085, 2, 0, 131086, 2, 0, 196620, 2, 0, 196621, 2, 0, 262155, 2, 0, 262156, 2, 0, 327689, 2, 0, 327690, 2, 0, 327691, 2, 0, 393224, 2, 0, 393225, 2, 0, 458759, 2, 0, 458760, 2, 0, 524295, 2, 0, 589831, 2, 0, 655366, 2, 0, 720901, 2, 0, 720902, 2, 0, 786437, 2, 0, 851973, 2, 0 )
+tile_data = PoolIntArray( 0, 0, 0, 16, 0, 0, 131085, 2, 0, 131086, 2, 0, 196620, 2, 0, 196621, 2, 0, 262155, 2, 0, 262156, 2, 0, 327689, 2, 0, 327690, 2, 0, 327691, 2, 0, 393224, 2, 0, 393225, 2, 0, 458759, 2, 0, 458760, 2, 0, 524295, 2, 0, 589831, 2, 0, 655366, 2, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 686.512, 614.734 )
@@ -21,4 +27,14 @@ current = true
 position = Vector2( 369.37, 413.689 )
 
 [node name="Player1" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 686.512, 614.734 )
+position = Vector2( 792.512, 555.734 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NodeFlag" type="Node" parent="Navigation2D"]
+script = ExtResource( 4 )
+property_name = "navigation"
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+position = Vector2( -56, -18 )
+navpoly = SubResource( 1 )

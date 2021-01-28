@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "State",
+"class": "Agro2D",
+"language": "GDScript",
+"path": "res://ai/agro2d.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character2D",
 "language": "GDScript",
@@ -40,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://base_scripts/face_movement_2d.gd"
 }, {
 "base": "Node",
+"class": "Goto",
+"language": "GDScript",
+"path": "res://ai/goto.gd"
+}, {
+"base": "Node",
 "class": "MovementInput2D",
 "language": "GDScript",
 "path": "res://base_scripts/movement_input_2d.gd"
@@ -50,26 +60,52 @@ _global_script_classes=[ {
 "path": "res://actors/node_flag.gd"
 }, {
 "base": "RayCast2D",
-"class": "NodeSight",
+"class": "NodeSight2D",
 "language": "GDScript",
-"path": "res://ai/node_sight.gd"
+"path": "res://ai/node_sight2d.gd"
 }, {
 "base": "RayCast2D",
 "class": "RayBody2D",
 "language": "GDScript",
 "path": "res://base_scripts/ray_body_2d.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://ai/state.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://ai/state_machine.gd"
+}, {
+"base": "Reference",
+"class": "TriggerUntrigger",
+"language": "GDScript",
+"path": "res://ai/trigger_untrigger.gd"
+}, {
+"base": "State",
+"class": "Wander2D",
+"language": "GDScript",
+"path": "res://ai/wander2d.gd"
 } ]
 _global_script_class_icons={
+"Agro2D": "",
 "Character2D": "",
 "CharacterAnimator": "",
 "ClassicCharacter2D": "",
 "Damageable": "",
 "EnemyFlag": "",
 "FaceMovement2D": "",
+"Goto": "",
 "MovementInput2D": "",
 "NodeFlag": "",
-"NodeSight": "",
-"RayBody2D": ""
+"NodeSight2D": "",
+"RayBody2D": "",
+"State": "",
+"StateMachine": "",
+"TriggerUntrigger": "",
+"Wander2D": ""
 }
 
 [application]
