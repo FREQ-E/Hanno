@@ -29,7 +29,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://base_scripts/classic_character_2d.gd"
 }, {
-"base": "Reference",
+"base": "Node",
+"class": "DamageHue",
+"language": "GDScript",
+"path": "res://combat_scripts/damage_hue.gd"
+}, {
+"base": "Node",
 "class": "Damageable",
 "language": "GDScript",
 "path": "res://combat_scripts/damageable.gd"
@@ -79,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ai/state_machine.gd"
 }, {
-"base": "Reference",
+"base": "StateMachine",
 "class": "TriggerUntrigger",
 "language": "GDScript",
 "path": "res://ai/trigger_untrigger.gd"
@@ -94,6 +99,7 @@ _global_script_class_icons={
 "Character2D": "",
 "CharacterAnimator": "",
 "ClassicCharacter2D": "",
+"DamageHue": "",
 "Damageable": "",
 "EnemyFlag": "",
 "FaceMovement2D": "",

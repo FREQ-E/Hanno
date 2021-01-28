@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://actors/alien1/Possible_Alien.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://ai/goto.gd" type="Script" id=5]
 [ext_resource path="res://ai/trigger_untrigger.gd" type="Script" id=6]
 [ext_resource path="res://ai/agro2d.gd" type="Script" id=7]
+[ext_resource path="res://combat_scripts/damageable.gd" type="Script" id=8]
+[ext_resource path="res://invert_material.tres" type="Material" id=9]
+[ext_resource path="res://combat_scripts/damage_hue.gd" type="Script" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 37.2074
@@ -30,10 +33,12 @@ func _handle_untriggered() -> void:
 "
 
 [node name="Alien1" type="KinematicBody2D"]
+material = ExtResource( 9 )
 collision_layer = 4
 script = ExtResource( 1 )
 
 [node name="Possible_Alien" type="Sprite" parent="."]
+use_parent_material = true
 position = Vector2( 0, -27.3643 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
@@ -61,3 +66,9 @@ script = ExtResource( 4 )
 
 [node name="Agro2D" type="Node" parent="WanderAgro"]
 script = ExtResource( 7 )
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="DamageHue" type="Node" parent="."]
+script = ExtResource( 10 )
