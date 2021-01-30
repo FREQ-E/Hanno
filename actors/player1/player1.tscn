@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://base_scripts/movement_input_2d.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://actors/character_animator.gd" type="Script" id=5]
 [ext_resource path="res://actors/player1/Front-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://actors/player1/Back-Sheet.png" type="Texture" id=7]
+[ext_resource path="res://actors/ui1/ui1.tscn" type="PackedScene" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 6 )
@@ -86,7 +87,7 @@ position = Vector2( 0, -15.801 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
 animation = "walk_down"
-frame = 3
+frame = 1
 playing = true
 script = ExtResource( 5 )
 
@@ -102,3 +103,5 @@ dash_speed = 2000.0
 [node name="NodeFlag" type="Node" parent="."]
 script = ExtResource( 3 )
 property_name = "player"
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 8 )]

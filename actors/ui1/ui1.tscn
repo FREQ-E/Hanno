@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://actors/ui1/Health Shell.png" type="Texture" id=1]
+[ext_resource path="res://actors/ui1/Health Bar.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "# This is a built in script for the health bar
+# built in because its dead simple and doesnt need to be used elsewhere
+# max value should always be one; Change the step
+extends TextureProgress
+
+
+var health_source: Damageable
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	if is_instance_valid(GlobalData.player):
+		yield(GlobalData, \"player_changed\")
+	
+	health_source = GlobalData.player.get_node(\"Damageable\")
+	health_source.connect(\"healed\", self, \"update_progress\")
+	health_source.connect(\"damaged\", self, \"update_progress\")
+	update_progress(null)
+
+
+func update_progress(_value) -> void:
+	value = health_source.health / health_source.max_health
+"
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = -24.1602
+margin_right = 64.0
+margin_bottom = 15.8398
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="TextureRect"]
+margin_left = 15.5563
+margin_top = 11.6231
+margin_right = 59.5564
+margin_bottom = 51.6231
+max_value = 1.0
+step = 0.1
+value = 1.0
+texture_progress = ExtResource( 2 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
