@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Possible_Alien.png-724991c9178bce0bc86183eb1a77591a.stex"
+path="res://.import/rock.png-2a4c3730679bbc4527f1cd0435772880.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/alien1/Possible_Alien.png"
-dest_files=[ "res://.import/Possible_Alien.png-724991c9178bce0bc86183eb1a77591a.stex" ]
+source_file="res://levels/rock.png"
+dest_files=[ "res://.import/rock.png-2a4c3730679bbc4527f1cd0435772880.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

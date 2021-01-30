@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/floor1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
@@ -10,24 +10,50 @@ vertices = PoolVector2Array( 800, 104, 810, 168, 745, 166, -10, -26, 945, -20, 9
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 4, 5, 0 ), PoolIntArray( 6, 7, 3, 8 ), PoolIntArray( 9, 10, 11, 3 ), PoolIntArray( 12, 13, 14, 3 ), PoolIntArray( 2, 15, 12, 3 ), PoolIntArray( 11, 16, 8, 3 ), PoolIntArray( 9, 3, 14, 17 ) ]
 outlines = [ PoolVector2Array( -10, -26, -14, 749, 373, 737, 367, 626, 424, 613, 427, 424, 494, 422, 491, 356, 543, 349, 553, 293, 671, 296, 672, 237, 744, 233, 745, 166, 810, 168, 800, 104, 939, 107, 945, -20 ) ]
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 1310.31 )
+
 [node name="Node2D" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Ground" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
+cell_size = Vector2( 512, 512 )
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 16, 0, 0, 131085, 2, 0, 131086, 2, 0, 196620, 2, 0, 196621, 2, 0, 262155, 2, 0, 262156, 2, 0, 327689, 2, 0, 327690, 2, 0, 327691, 2, 0, 393224, 2, 0, 393225, 2, 0, 458759, 2, 0, 458760, 2, 0, 524295, 2, 0, 589831, 2, 0, 655366, 2, 0 )
+tile_data = PoolIntArray( -65538, 4, 0, -65537, 4, 0, -131072, 4, 0, -131071, 4, 0, -131070, 4, 0, -131069, 4, 0, -131068, 4, 0, -2, 4, 0, -1, 4, 0, -65536, 4, 0, -65535, 4, 0, -65534, 4, 0, -65533, 4, 0, -65532, 4, 0, 65534, 4, 0, 65535, 4, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 131070, 4, 0, 131071, 4, 0, 65536, 4, 0, 65537, 4, 0, 65538, 4, 0, 65539, 4, 0, 65540, 4, 0, 196606, 4, 0, 196607, 4, 0, 131072, 4, 0, 131073, 4, 0, 131074, 4, 0, 131075, 4, 0, 131076, 4, 0, 131085, 2, 0, 131086, 2, 0, 262142, 4, 0, 262143, 4, 0, 196608, 4, 0, 196609, 4, 0, 196610, 4, 0, 196611, 4, 0, 196612, 4, 0, 196620, 2, 0, 196621, 2, 0, 327678, 4, 0, 327679, 4, 0, 262144, 4, 0, 262145, 4, 0, 262146, 4, 0, 262147, 4, 0, 262148, 4, 0, 262155, 2, 0, 262156, 2, 0, 327691, 2, 0 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 686.512, 614.734 )
-current = true
+[node name="Rocks" type="TileMap" parent="Ground"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( -65532, 3, 0, -65531, 3, 0, 5, 3, 0, 65539, 4, 0, 65541, 3, 0, 131077, 3, 0, 131085, 2, 0, 131086, 2, 0, 196612, 3, 0, 196613, 3, 0, 196620, 2, 0, 196621, 2, 0, 262148, 3, 0, 262155, 2, 0, 262156, 2, 0, 327682, 3, 0, 327683, 3, 0, 327684, 3, 0, 327691, 2, 0, 393217, 3, 0, 393218, 3, 0, 458753, 3, 0 )
 
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Alien1" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 369.37, 413.689 )
 
+[node name="Alien2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 462.073, 121.277 )
+
+[node name="Alien3" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 231.64, 175.31 )
+
+[node name="Alien4" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 159.067, 333.17 )
+
+[node name="Alien5" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 16.5688, 376.608 )
+
+[node name="Alien6" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 102.385, 564.662 )
+
 [node name="Player1" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 792.512, 555.734 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player1"]
+current = true
+zoom = Vector2( 1.8, 1.8 )
+smoothing_enabled = true
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
@@ -38,3 +64,23 @@ property_name = "navigation"
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 position = Vector2( -56, -18 )
 navpoly = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -517.243, 768.314 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 2053.87, 768.314 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 770.201, -511.58 )
+rotation = -1.57079
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 764.538, 2051.98 )
+rotation = -1.57079
+shape = SubResource( 2 )

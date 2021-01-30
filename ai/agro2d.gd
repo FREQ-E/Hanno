@@ -3,7 +3,7 @@ class_name Agro2D
 extends State
 
 
-export var min_distance := 200.0
+export var min_distance := 100.0
 export var speed := 300.0
 
 var target: Node

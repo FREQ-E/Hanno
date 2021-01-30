@@ -9,6 +9,7 @@ export var navigation_path: NodePath = "GlobalNavigation"
 export var speed := 1000.0
 export var enabled := false setget set_enabled
 export var one_shot := true									# if true, will disable once the target is reached
+export(float, 0, 1) var halting_tolerance := 0.01
 
 var navigation: Node
 var target_origin
@@ -64,7 +65,9 @@ func _process(_delta):
 	get_parent().movement_vector = movement_vector
 	
 	if one_shot:
-		if path.size() == 2 and (_last_origin - path[1]).normalized().dot((path[0] - path[1]).normalized()) <= 0:
+		print(path[0].distance_to(_last_origin))
+		if path.size() == 2 and ((_last_origin - path[1]).normalized().dot((path[0] - path[1]).normalized()) <= 0 or \
+		path[0].distance_to(_last_origin) <= halting_tolerance):
 			set_enabled(false)
 			emit_signal("finished")
 		

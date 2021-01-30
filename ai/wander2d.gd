@@ -5,9 +5,9 @@ extends State
 
 export var max_wander_distance := 100.0
 export var min_wander_distance := 50.0
-export var speed := 100.0
-export var wander_pause := 3.0
-export var revolve_around_origin := true				# if true, will wander around the origin of the character when this node was ready. Else, random origins will revolve around the characters current position
+export var speed := 200.0
+export var wander_pause := 0.0
+export var revolve_around_origin := false				# if true, will wander around the origin of the character when this node was ready. Else, random origins will revolve around the characters current position
 
 var timer := Timer.new()
 
@@ -26,15 +26,16 @@ func _loop() -> void:
 	get_parent().goto.connect("finished", self, "continue_loop")
 	
 	while active:
-		timer.start(wander_pause)
-		yield(self, "_continue_loop")
-		timer.stop()		# just in case loop was halted and the timer is still running
+		if wander_pause > 0:
+			timer.start(wander_pause)
+			yield(self, "_continue_loop")
+			timer.stop()		# just in case loop was halted and the timer is still running
 		
 		if not active:
 			break
 		
 		get_parent().goto.enabled = true
-		get_parent().goto.target_origin = Vector2.UP.rotated(rand_range(0, TAU)) * lerp(min_wander_distance, max_wander_distance, randf()) + original_origin if revolve_around_origin else get_parent().global_transform.origin
+		get_parent().goto.target_origin = Vector2.UP.rotated(rand_range(0, TAU)) * lerp(min_wander_distance, max_wander_distance, randf()) + (original_origin if revolve_around_origin else get_parent().get_parent().global_transform.origin)
 		yield(self, "_continue_loop")
 	
 	get_parent().goto.enabled = false

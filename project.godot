@@ -124,6 +124,11 @@ config/icon="res://icon.png"
 
 GlobalData="*res://global_data.gd"
 
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep_width"
+
 [input]
 
 "move right"={
