@@ -90,7 +90,7 @@ position = Vector2( 0, -15.801 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
 animation = "walk_down"
-frame = 2
+frame = 3
 playing = true
 script = ExtResource( 5 )
 

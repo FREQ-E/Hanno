@@ -16,6 +16,6 @@ func _ready():
 
 func _handle_damaged(_value) -> void:
 	var fraction := 1 - damageable.health / damageable.max_health
-	print(fraction)
+	#print(fraction)
 	get_parent().modulate.h = max_hue * fraction
 	get_parent().modulate.s = max_saturation * fraction
