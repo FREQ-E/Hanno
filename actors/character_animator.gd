@@ -12,7 +12,7 @@ func _process(delta):
 		stop()
 		frame = 1
 	
-	else:
+	elif delta > 0:
 		var local: Vector2 = global_transform.basis_xform_inv(get_parent().movement_vector)
 		var new_origin: Vector2 = get_parent().global_transform.origin
 		speed_scale = new_origin.distance_to(_last_origin) / delta / default_movement_speed

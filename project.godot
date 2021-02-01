@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ai/agro2d.gd"
 }, {
+"base": "RigidBody2D",
+"class": "BaseBullet",
+"language": "GDScript",
+"path": "res://base_scripts/base_bullet.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character2D",
 "language": "GDScript",
@@ -40,11 +45,6 @@ _global_script_classes=[ {
 "path": "res://combat_scripts/damageable.gd"
 }, {
 "base": "Node",
-"class": "EnemyFlag",
-"language": "GDScript",
-"path": "res://actors/enemy_flag.gd"
-}, {
-"base": "Node",
 "class": "FaceMovement2D",
 "language": "GDScript",
 "path": "res://base_scripts/face_movement_2d.gd"
@@ -59,17 +59,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://base_scripts/movement_input_2d.gd"
 }, {
-"base": "Node",
-"class": "NodeFlag",
-"language": "GDScript",
-"path": "res://actors/node_flag.gd"
-}, {
 "base": "RayCast2D",
 "class": "NodeSight2D",
 "language": "GDScript",
 "path": "res://ai/node_sight2d.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "PlayerShooting",
 "language": "GDScript",
 "path": "res://combat_scripts/player_shooting.gd"
@@ -101,16 +96,15 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Agro2D": "",
+"BaseBullet": "",
 "Character2D": "",
 "CharacterAnimator": "",
 "ClassicCharacter2D": "",
 "DamageHue": "",
 "Damageable": "",
-"EnemyFlag": "",
 "FaceMovement2D": "",
 "Goto": "",
 "MovementInput2D": "",
-"NodeFlag": "",
 "NodeSight2D": "",
 "PlayerShooting": "",
 "RayBody2D": "",
@@ -128,7 +122,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GlobalData="*res://global_data.gd"
+GlobalFuncs="*res://global_funcs.gd"
 
 [display]
 

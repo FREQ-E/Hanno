@@ -17,6 +17,7 @@ onready var original_origin: Vector2 = get_parent().get_parent().global_transfor
 func _enter_tree():
 	add_child(timer)
 	timer.one_shot = true
+	# warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "continue_loop")
 
 

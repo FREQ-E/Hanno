@@ -10,6 +10,7 @@ onready var damageable: Damageable = get_node(damageable_path)
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	damageable.connect("damaged", self, "_handle_damaged")
 
 

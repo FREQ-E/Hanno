@@ -26,10 +26,7 @@ func _ready():
 	_is_ready = true
 	
 	if navigation_path == NodePath("GlobalNavigation"):
-		if not is_instance_valid(GlobalData.navigation):
-			yield(GlobalData, "navigation_changed")
-	
-		navigation = GlobalData.navigation
+		navigation = GlobalFuncs.yield_and_get_group("navigation")[0]
 	
 	else:
 		navigation = get_node(navigation_path)
@@ -65,7 +62,6 @@ func _process(_delta):
 	get_parent().movement_vector = movement_vector
 	
 	if one_shot:
-		print(path[0].distance_to(_last_origin))
 		if path.size() == 2 and ((_last_origin - path[1]).normalized().dot((path[0] - path[1]).normalized()) <= 0 or \
 		path[0].distance_to(_last_origin) <= halting_tolerance):
 			set_enabled(false)

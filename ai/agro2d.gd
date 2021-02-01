@@ -17,6 +17,7 @@ func _loop() -> void:
 	target = get_parent().trigger_node.target
 	get_parent().goto.one_shot = false
 	get_parent().goto.speed = speed
+	# warning-ignore:return_value_discarded
 	get_tree().connect("idle_frame", self, "continue_loop")
 	
 	while active:
