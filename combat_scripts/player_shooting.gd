@@ -6,9 +6,9 @@ extends Node2D
 
 export var bullet_speed := 1000
 export var fire_rate := 0.2
+export(PackedScene) var bullet_scene := preload("res://actors/player1/player_bullet.tscn")
 
-var bullet_scene = preload("res://actors/player1/player_bullet.tscn")
-var can_fire = true
+var can_fire := true
 
 
 func _process(_delta):
