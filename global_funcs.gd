@@ -10,3 +10,11 @@ func yield_and_get_group(group: String) -> Array:
 		yield(tree, "node_added")
 	
 	return tree.get_nodes_in_group(group)
+
+
+func _input(event):
+	if event.is_action_pressed("fullscreen"):
+		OS.window_fullscreen = not OS.window_fullscreen
+	
+	elif event.is_action_pressed("ui_cancel"):
+		get_tree().quit()
