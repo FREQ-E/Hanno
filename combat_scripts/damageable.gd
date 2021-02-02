@@ -15,6 +15,12 @@ export var invincible := false						# if true, won't take damage
 export var undying := false setget set_undying		# if true, won't die when health drops below 0. If health was below 0 and undying is set to false, death will be emitted
 export var unhealing := false						# if true, won't be able to heal
 
+var _is_ready := false
+
+
+func _ready():
+	_is_ready = true
+
 
 func set_max_health(value: float) -> void:
 	max_health = value
@@ -24,6 +30,10 @@ func set_max_health(value: float) -> void:
 
 
 func set_health(value: float) -> void:
+	if not _is_ready:
+		health = value
+		return
+	
 	if value < health:
 		emit_signal("damaged", health - value)
 		

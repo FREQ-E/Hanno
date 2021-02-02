@@ -38,3 +38,4 @@ func _process(_delta):
 	get_tree().current_scene.add_child(bullet_instance)
 	can_fire = false
 	yield(get_tree().create_timer(fire_rate), "timeout")
+	can_fire = true
