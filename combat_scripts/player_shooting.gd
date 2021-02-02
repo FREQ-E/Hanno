@@ -9,33 +9,36 @@ export var fire_rate := 0.2
 export(PackedScene) var bullet_scene := preload("res://actors/player1/player_bullet.tscn")
 
 var can_fire := true
-var dir : Vector2
+
 
 func _process(_delta):
 	if not can_fire:
 		return
 	
-	if (Input.is_action_pressed("fire_up") or
-		Input.is_action_pressed("fire_left") or
-		Input.is_action_pressed("fire_down") or
-		Input.is_action_pressed("fire_right")) and can_fire:
+	var dir : Vector2
+	
+	if Input.is_action_pressed("fire_up"):
+		dir = Vector2.UP
 		
-		if (Input.is_action_pressed("fire_up")):
-			dir = Vector2(0,-1)
-		elif (Input.is_action_pressed("fire_left")):
-			dir = Vector2(-1,0)
-		elif (Input.is_action_pressed("fire_down")):
-			dir = Vector2(0,1)
-		elif (Input.is_action_pressed("fire_right")):
-			dir = Vector2(1,0)
+	elif Input.is_action_pressed("fire_left"):
+		dir = Vector2.LEFT
 		
-		var bullet_instance = bullet_scene.instance()
-		bullet_instance.transform = global_transform
-		bullet_instance.linear_velocity = dir * bullet_speed
-		get_tree().current_scene.add_child(bullet_instance)
-		can_fire = false
-		yield(get_tree().create_timer(fire_rate), "timeout")
-		can_fire = true
+	elif Input.is_action_pressed("fire_down"):
+		dir = Vector2.DOWN
+		
+	elif Input.is_action_pressed("fire_right"):
+		dir = Vector2.RIGHT
+	
+	else:
+		return
+	
+	var bullet_instance = bullet_scene.instance()
+	bullet_instance.transform = global_transform
+	bullet_instance.linear_velocity = dir * bullet_speed
+	get_tree().current_scene.add_child(bullet_instance)
+	can_fire = false
+	yield(get_tree().create_timer(fire_rate), "timeout")
+	can_fire = true
 
 #func _process(_delta):
 #	if not can_fire:

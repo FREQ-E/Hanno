@@ -56,4 +56,4 @@ script = ExtResource( 8 )
 
 [node name="DamageHue" type="Node" parent="."]
 script = ExtResource( 10 )
-[connection signal="death" from="Damageable" to="." method="_on_Damageable_death"]
+[connection signal="death" from="Damageable" to="." method="queue_free"]

@@ -18,32 +18,36 @@ export var unhealing := false						# if true, won't be able to heal
 
 func set_max_health(value: float) -> void:
 	max_health = value
+	
 	if health > max_health:
 		health = max_health
 
 
 func set_health(value: float) -> void:
 	if value < health:
-		health = value
 		emit_signal("damaged", health - value)
 		
 		if invincible:
 			return
 		
+		health = value
+		
+		if health < 0 and not undying:
+			emit_signal("death")
+			return
+		
 		flash()
 	
 	elif value > health:
-		health = value
 		emit_signal("healed", value - health)
 		
 		if unhealing:
 			return
-	
-	if health > max_health:
-		health = max_health
-	
-	elif health <= 0 and not undying:
-		emit_signal("death")
+		
+		health = value
+		
+		if health > max_health:
+			health = max_health
 
 
 func set_undying(value: bool) -> void:

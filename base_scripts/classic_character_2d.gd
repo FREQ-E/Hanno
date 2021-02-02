@@ -9,8 +9,3 @@ export(float, 0, 1000) var brake_weight := 18.0					# weight used to interpolate
 
 func _integrate_movement(vector: Vector2, delta: float) -> Vector2:
 	return linear_velocity.linear_interpolate(vector, 1.0 - exp(- (acceleration_weight if vector.length() >= linear_velocity.length() else brake_weight) * delta))
-
-
-func _on_Damageable_death() -> void:
-	queue_free()
-	pass # Replace with function body.
