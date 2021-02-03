@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://base_scripts/movement_input_2d.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://actors/player1/Back-Sheet.png" type="Texture" id=7]
 [ext_resource path="res://actors/ui1/ui1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://actors/player1/player_shooting.gd" type="Script" id=9]
+[ext_resource path="res://actors/player1/crystal_manager.gd" type="Script" id=10]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -111,6 +112,7 @@ position = Vector2( 0, -15.801 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 13 )
 animation = "walk_down"
+frame = 3
 playing = true
 script = ExtResource( 5 )
 
@@ -145,3 +147,6 @@ position = Vector2( 0, 284.256 )
 position = Vector2( -142.128, 142.128 )
 
 [node name="Position2D4" type="Position2D" parent="Targets"]
+
+[node name="CrystalManager" type="Node" parent="."]
+script = ExtResource( 10 )
