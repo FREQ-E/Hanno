@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Alien.png-50fe6635fdf9e45b1a6da32e7f9fb29b.stex"
+path="res://.import/crashed ship.png-2b7049e80e1a931645df1ae915f1b935.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/alien1/Alien.png"
-dest_files=[ "res://.import/Alien.png-50fe6635fdf9e45b1a6da32e7f9fb29b.stex" ]
+source_file="res://levels/crashed ship.png"
+dest_files=[ "res://.import/crashed ship.png-2b7049e80e1a931645df1ae915f1b935.stex" ]
 
 [params]
 

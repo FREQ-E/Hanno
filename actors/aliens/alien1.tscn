@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
-[ext_resource path="res://actors/alien1/Alien.png" type="Texture" id=2]
+[ext_resource path="res://actors/aliens/Alien.png" type="Texture" id=2]
+[ext_resource path="res://actors/aliens/enemy_shooting.gd" type="Script" id=3]
 [ext_resource path="res://ai/wander2d.gd" type="Script" id=4]
 [ext_resource path="res://ai/goto.gd" type="Script" id=5]
 [ext_resource path="res://ai/trigger_untrigger.gd" type="Script" id=6]
@@ -15,11 +16,11 @@
 radius = 37.2074
 
 [node name="Alien1" type="KinematicBody2D" groups=[
-"enemies",
+"Enemies",
 ]]
 material = ExtResource( 9 )
 collision_layer = 4
-collision_mask = 5
+collision_mask = 7
 script = ExtResource( 1 )
 
 [node name="Possible_Alien" type="Sprite" parent="."]
@@ -50,10 +51,14 @@ script = ExtResource( 4 )
 
 [node name="Agro2D" type="Node" parent="WanderAgro"]
 script = ExtResource( 7 )
+min_distance = 10.0
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource( 8 )
 
 [node name="DamageHue" type="Node" parent="."]
 script = ExtResource( 10 )
+
+[node name="EnemyShooting" type="Node2D" parent="."]
+script = ExtResource( 3 )
 [connection signal="death" from="Damageable" to="." method="queue_free"]

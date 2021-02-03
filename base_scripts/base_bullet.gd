@@ -2,7 +2,7 @@ class_name BaseBullet
 extends RigidBody2D
 
 
-export var target_group := "enemies"
+export var target_group := "Enemies"
 export var damage := 0.5
 
 

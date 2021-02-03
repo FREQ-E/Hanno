@@ -16,7 +16,7 @@ var health_source: Damageable
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# warning-ignore-all:return_value_discarded
-	health_source = GlobalFuncs.yield_and_get_group(\"player\")[0].get_node(\"Damageable\")
+	health_source = GlobalFuncs.yield_and_get_group(\"Player\")[0].get_node(\"Damageable\")
 	health_source.connect(\"healed\", self, \"update_progress\")
 	health_source.connect(\"damaged\", self, \"update_progress\")
 	update_progress(null)

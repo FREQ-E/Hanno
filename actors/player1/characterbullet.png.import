@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/characterbullet.png-a8bff46baf7304f00f3e1c515b3cdbc9.stex"
+path="res://.import/characterbullet.png-0e39b1bf10347a6cbab89bce0788a9b7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/characterbullet.png"
-dest_files=[ "res://.import/characterbullet.png-a8bff46baf7304f00f3e1c515b3cdbc9.stex" ]
+source_file="res://actors/player1/characterbullet.png"
+dest_files=[ "res://.import/characterbullet.png-0e39b1bf10347a6cbab89bce0788a9b7.stex" ]
 
 [params]
 

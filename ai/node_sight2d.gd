@@ -6,7 +6,7 @@ extends RayCast2D
 signal triggered			# emitted as soon as the target is hit and in range
 signal untriggered			# emitted as soon as the target falls out of sight/range
 
-export var target_path: NodePath = "player"		# the path to the target (leave at "player" to target the player group)
+export var target_path: NodePath = "Player"		# the path to the target (leave at "Player" to target the Player group)
 export var max_distance := 3000.0				# the maximum distance the raycast will cast to
 
 var target: Node2D							# the node this raycast will cast to
@@ -14,8 +14,8 @@ var target_visible := false					# true if the target node is in range and in sig
 
 
 func _ready():
-	if target_path == NodePath("player"):
-		target = GlobalFuncs.yield_and_get_group("player")[0]
+	if target_path == NodePath("Player"):
+		target = GlobalFuncs.yield_and_get_group("Player")[0]
 	
 	elif not target_path.is_empty():
 		target = get_node(target_path)

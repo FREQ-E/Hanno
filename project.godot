@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://base_scripts/classic_character_2d.gd"
 }, {
+"base": "VisibilityNotifier2D",
+"class": "CrystalBody",
+"language": "GDScript",
+"path": "res://actors/crystals/crystal_body.gd"
+}, {
 "base": "Node",
 "class": "DamageHue",
 "language": "GDScript",
@@ -43,6 +48,11 @@ _global_script_classes=[ {
 "class": "Damageable",
 "language": "GDScript",
 "path": "res://combat_scripts/damageable.gd"
+}, {
+"base": "Node2D",
+"class": "EnemyShooting",
+"language": "GDScript",
+"path": "res://actors/aliens/enemy_shooting.gd"
 }, {
 "base": "Node",
 "class": "FaceMovement2D",
@@ -67,7 +77,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "PlayerShooting",
 "language": "GDScript",
-"path": "res://combat_scripts/player_shooting.gd"
+"path": "res://actors/player1/player_shooting.gd"
 }, {
 "base": "RayCast2D",
 "class": "RayBody2D",
@@ -100,8 +110,10 @@ _global_script_class_icons={
 "Character2D": "",
 "CharacterAnimator": "",
 "ClassicCharacter2D": "",
+"CrystalBody": "",
 "DamageHue": "",
 "Damageable": "",
+"EnemyShooting": "",
 "FaceMovement2D": "",
 "Goto": "",
 "MovementInput2D": "",

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://levels/floor1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/alien1/alien1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/aliens/alien1.tscn" type="PackedScene" id=3]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 2075.62, -494.184, 2096.41, 2041.49, -437.822, 2041.49, -454.773, -480.03 )

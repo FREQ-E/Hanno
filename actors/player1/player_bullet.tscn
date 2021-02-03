@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://actors/characterbullet.png" type="Texture" id=1]
+[ext_resource path="res://actors/player1/characterbullet.png" type="Texture" id=1]
 [ext_resource path="res://base_scripts/base_bullet.gd" type="Script" id=2]
+
 
 [node name="PlayerBullet" type="RigidBody2D"]
 rotation = 0.00424423

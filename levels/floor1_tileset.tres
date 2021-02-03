@@ -2,7 +2,8 @@
 
 [ext_resource path="res://levels/solid color ground.png" type="Texture" id=1]
 [ext_resource path="res://levels/rock.png" type="Texture" id=2]
-[ext_resource path="res://actors/crashed ship.png" type="Texture" id=3]
+[ext_resource path="res://levels/crashed ship.png" type="Texture" id=3]
+
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 104, 0, 128, 44, 128, 96, 112, 112, 24, 112, 0, 104, 0, 44, 80, 0 )
