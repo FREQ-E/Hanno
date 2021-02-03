@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://actors/aliens/Alien.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://actors/invert_material.tres" type="Material" id=9]
 [ext_resource path="res://combat_scripts/damage_hue.gd" type="Script" id=10]
 [ext_resource path="res://ai/node_sight2d.gd" type="Script" id=11]
+[ext_resource path="res://actors/spawn_checker.gd" type="Script" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 37.2074
@@ -61,4 +62,7 @@ script = ExtResource( 10 )
 
 [node name="EnemyShooting" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="SpawnChecker" type="VisibilityNotifier2D" parent="."]
+script = ExtResource( 12 )
 [connection signal="death" from="Damageable" to="." method="queue_free"]
