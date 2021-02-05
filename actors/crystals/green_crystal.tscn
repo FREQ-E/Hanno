@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actors/crystals/crystal_body.gd" type="Script" id=1]
-[ext_resource path="res://actors/spawn_checker.gd" type="Script" id=2]
-[ext_resource path="res://actors/crystals/Blue Crystal.png" type="Texture" id=3]
+[ext_resource path="res://actors/spawn_instance.gd" type="Script" id=2]
+[ext_resource path="res://actors/crystals/Green Crystal.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 27.1218, 42.0871 )
@@ -27,7 +27,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Crystal1" type="Area2D"]
+[node name="GreenCrystal" type="Area2D" groups=[
+"Crystals",
+]]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 1 )
@@ -36,7 +38,6 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="SpawnChecker" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0.0279547, 0.835221 )
 scale = Vector2( 1.67931, 2.45049 )
 rect = Rect2( -20, -20, 40, 40 )
 script = ExtResource( 2 )
@@ -44,4 +45,5 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 5 )
+frame = 1
 playing = true

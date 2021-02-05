@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://actors/ui1/Health Shell.png" type="Texture" id=1]
 [ext_resource path="res://actors/ui1/Health Bar.png" type="Texture" id=2]
+[ext_resource path="res://actors/ui1/Stamina Bar.png" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "# This is a built in script for the health bar
@@ -26,12 +27,12 @@ func update_progress(_value) -> void:
 	value = health_source.health / health_source.max_health
 "
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="UI1" type="CanvasLayer"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_top = -24.1602
+margin_top = -7.62374
 margin_right = 64.0
-margin_bottom = 15.8398
+margin_bottom = 32.3763
 rect_scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 __meta__ = {
@@ -40,14 +41,27 @@ __meta__ = {
 
 [node name="TextureProgress" type="TextureProgress" parent="TextureRect"]
 margin_left = 16.0
-margin_top = 12.0
+margin_top = 8.0
 margin_right = 60.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 max_value = 1.0
 step = 0.1
 value = 1.0
 texture_progress = ExtResource( 2 )
 script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress2" type="TextureProgress" parent="TextureRect"]
+margin_left = 16.0
+margin_top = 19.0
+margin_right = 60.0
+margin_bottom = 24.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+texture_progress = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

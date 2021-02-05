@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://base_scripts/movement_input_2d.gd" type="Script" id=2]
@@ -10,6 +10,12 @@
 [ext_resource path="res://actors/ui1/ui1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://actors/player1/player_shooting.gd" type="Script" id=9]
 [ext_resource path="res://actors/player1/crystal_manager.gd" type="Script" id=10]
+[ext_resource path="res://actors/player1/local_spawner.gd" type="Script" id=11]
+[ext_resource path="res://actors/crystals/green_crystal.tscn" type="PackedScene" id=12]
+[ext_resource path="res://actors/crystals/blue_crystal.tscn" type="PackedScene" id=13]
+[ext_resource path="res://actors/crystals/purple_crystal.tscn" type="PackedScene" id=14]
+[ext_resource path="res://actors/crystals/orange_crystal.tscn" type="PackedScene" id=15]
+[ext_resource path="res://actors/crystals/red_crystal.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -99,6 +105,10 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=16]
 radius = 32.9877
 
+[sub_resource type="Curve" id=17]
+max_value = 4.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 1, Vector2( 0.251986, 0 ), 0.0, 4.36139, 1, 1, Vector2( 0.952347, 3.05455 ), 4.36139, 19.8402, 1, 1, Vector2( 1, 4 ), 19.8402, 0.0, 1, 0 ]
+
 [node name="Player1" type="KinematicBody2D" groups=[
 "Player",
 ]]
@@ -112,6 +122,7 @@ position = Vector2( 0, -15.801 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 15 )
 animation = "walk_down"
+frame = 1
 playing = true
 script = ExtResource( 5 )
 
@@ -120,15 +131,15 @@ shape = SubResource( 16 )
 
 [node name="MovementInput2D" type="Node" parent="."]
 script = ExtResource( 2 )
-fast_speed = 1170.0
 default_speed = 770.0
+fast_speed = 1170.0
 dash_speed = 2000.0
 
 [node name="PlayerShooting" type="Node2D" parent="."]
 script = ExtResource( 9 )
 fire_rate = 0.35
 
-[node name="CanvasLayer" parent="." instance=ExtResource( 8 )]
+[node name="UI1" parent="." instance=ExtResource( 8 )]
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -149,3 +160,8 @@ position = Vector2( -142.128, 142.128 )
 
 [node name="CrystalManager" type="Node" parent="."]
 script = ExtResource( 10 )
+
+[node name="LocalSpawner" type="Node" parent="."]
+script = ExtResource( 11 )
+scenes = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ]
+probability_curve = SubResource( 17 )

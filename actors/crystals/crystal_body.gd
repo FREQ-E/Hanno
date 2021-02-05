@@ -8,6 +8,7 @@ onready var player: Node = GlobalFuncs.yield_and_get_group("Player")[0]
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	connect("body_entered", self, "_handle_body_entered")
 
 

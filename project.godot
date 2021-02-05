@@ -70,6 +70,11 @@ _global_script_classes=[ {
 "path": "res://ai/goto.gd"
 }, {
 "base": "Node",
+"class": "LocalSpawner",
+"language": "GDScript",
+"path": "res://actors/player1/local_spawner.gd"
+}, {
+"base": "Node",
 "class": "MovementInput2D",
 "language": "GDScript",
 "path": "res://base_scripts/movement_input_2d.gd"
@@ -90,9 +95,9 @@ _global_script_classes=[ {
 "path": "res://base_scripts/ray_body_2d.gd"
 }, {
 "base": "VisibilityNotifier2D",
-"class": "SpawnChecker",
+"class": "SpawnInstance",
 "language": "GDScript",
-"path": "res://actors/spawn_checker.gd"
+"path": "res://actors/spawn_instance.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -127,11 +132,12 @@ _global_script_class_icons={
 "EnemyShooting": "",
 "FaceMovement2D": "",
 "Goto": "",
+"LocalSpawner": "",
 "MovementInput2D": "",
 "NodeSight2D": "",
 "PlayerShooting": "",
 "RayBody2D": "",
-"SpawnChecker": "",
+"SpawnInstance": "",
 "State": "",
 "StateMachine": "",
 "TriggerUntrigger": "",
