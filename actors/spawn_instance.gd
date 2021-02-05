@@ -41,7 +41,7 @@ func _ready():
 	
 	if distance_check:
 		player = GlobalFuncs.yield_and_get_group("Player")[0]
-		# waring-ignore-all:return_value_discarded
+		# warning-ignore-all:return_value_discarded
 		connect("screen_exited", self, "set_process", [true])
 		connect("screen_entered", self, "set_process", [false])
 

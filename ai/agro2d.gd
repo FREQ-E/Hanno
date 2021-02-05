@@ -28,6 +28,7 @@ func _loop() -> void:
 	while active:
 		if use_sub_targets:
 			var targets := parent_target.get_node("Targets").get_children()
+			# warning-ignore:shadowed_variable
 			var min_distance := INF
 			var current_origin: Vector2 = get_parent().get_parent().global_transform.origin
 			
