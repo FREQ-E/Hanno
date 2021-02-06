@@ -12,6 +12,7 @@ func _ready():
 
 
 func _handle_collision(body: Node) -> void:
+	print(body.name)
 	queue_free()
 	
 	if body.is_in_group(target_group):

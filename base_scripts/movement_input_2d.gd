@@ -3,11 +3,16 @@
 class_name MovementInput2D
 extends Node
 
+
 signal dashed
 signal undashed
 
-
 export var default_speed := 5.0
+
+export var max_stamina := 5.0
+export var stamina_regen_rate := 0.5
+export var stamina_regen_delay := 1.0
+export var dash_stamina_usage := 1.0
 
 export var fast_speed := 10.0
 export var dash_speed := 20.0					# the speed the character travels during the dash
@@ -19,8 +24,20 @@ export var basis_node_path: NodePath			# If given, the user input will be transf
 var basis_node: Node2D
 var movement_vector: Vector2
 var dashing := false setget set_dashing			# if true, the character will dash until an obstacle is hit (or if triggered through sprint, will self disable after dash_duration)
+var sprinting := false
 
 var _last_sprint_time_msecs: int				# the system time the last time the sprint button was pressed
+var _last_walk_time_msecs: int					# the system time the last time the sprint button was pressed
+
+onready var stamina := max_stamina setget set_stamina
+
+
+func set_stamina(value: float) -> void:
+	if value > max_stamina:
+		stamina = max_stamina
+	
+	else:
+		stamina = value
 
 
 func set_dashing(value: bool) -> void:
@@ -34,8 +51,7 @@ func set_dashing(value: bool) -> void:
 			emit_signal("undashed")
 		
 		get_parent().linear_velocity = movement_vector		# hard set the value for sharper velocity changes
-	
-	dashing = value
+		dashing = value
 
 
 func _ready():
@@ -46,17 +62,24 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("sprint"):
 		_last_sprint_time_msecs = OS.get_system_time_msecs()
+		if stamina > 0:
+			sprinting = true
 	
-	elif not dashing and not is_zero_approx(movement_vector.length()) and event.is_action_released("sprint") and (OS.get_system_time_msecs() - _last_sprint_time_msecs) / 1000.0 <= dash_buffer:
-		set_dashing(true)
-		yield(get_tree().create_timer(dash_duration), "timeout")
-		set_dashing(false)
+	elif event.is_action_released("sprint"):
+		_last_walk_time_msecs = OS.get_system_time_msecs()
+		sprinting = false
+		
+		if not dashing and not is_zero_approx(movement_vector.length()) and stamina > dash_stamina_usage and (_last_walk_time_msecs - _last_sprint_time_msecs) / 1000.0 <= dash_buffer:
+			stamina -= dash_stamina_usage
+			set_dashing(true)
+			yield(get_tree().create_timer(dash_duration), "timeout")
+			set_dashing(false)
 
 
-func _process(_delta):
-	# the following magic with movement_vector allows finer control with joystick/joypad
+func _process(delta):
+	# the following magic with movement`vector allows finer control with joystick/joypad
 	if dashing:
-		if get_parent().get_slide_count() > 0:
+		if get_parent().is_on_wall():
 			set_dashing(false)
 	
 	else:
@@ -64,11 +87,19 @@ func _process(_delta):
 		var y := Input.get_action_strength("move down") - Input.get_action_strength("move up")
 		movement_vector = Vector2(x, y).normalized() * max(abs(x), abs(y))
 		
-		if Input.is_action_pressed("sprint"):
+		if sprinting:
 			movement_vector *= fast_speed
+			stamina -= delta
+			
+			if stamina <= 0:
+				stamina = 0
+				sprinting = false
 		
 		else:
 			movement_vector *= default_speed
+			
+			if stamina < max_stamina and (OS.get_system_time_msecs() - _last_walk_time_msecs) / 1000.0 >= stamina_regen_delay:
+				set_stamina(stamina + stamina_regen_rate * delta)
 	
 	if is_instance_valid(basis_node):
 		get_parent().movement_vector = basis_node.global_transform.basis_xform(movement_vector)
