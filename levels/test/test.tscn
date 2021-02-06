@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://levels/floor1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
@@ -6,7 +6,62 @@
 [ext_resource path="res://levels/objects_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://levels/nav_tile.png" type="Texture" id=5]
 
-[sub_resource type="NavigationPolygon" id=1]
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform bool invert = false;
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV).rgba;
+	if (invert) {
+		col.r = 1.0 - col.r;
+		col.g = 1.0 - col.g;
+		col.b = 1.0 - col.b;
+	}
+    COLOR.rgba = col.rgba;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=11]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="NavigationPolygon" id=12]
 vertices = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
@@ -19,7 +74,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
-0/navigation = SubResource( 1 )
+0/navigation = SubResource( 12 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 0/shape_one_way = false
@@ -48,27 +103,35 @@ tile_data = PoolIntArray( -262136, 4, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 6, 3, 0, 10,
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Alien1" parent="YSort" instance=ExtResource( 3 )]
+material = SubResource( 4 )
 position = Vector2( 369.37, 413.689 )
 
 [node name="Alien2" parent="YSort" instance=ExtResource( 3 )]
+material = SubResource( 5 )
 position = Vector2( 523.221, 533.561 )
 
 [node name="Alien3" parent="YSort" instance=ExtResource( 3 )]
+material = SubResource( 6 )
 position = Vector2( 913.041, 591.137 )
 
 [node name="Alien4" parent="YSort" instance=ExtResource( 3 )]
+material = SubResource( 7 )
 position = Vector2( 448.655, 858.254 )
 
 [node name="Alien5" parent="YSort" instance=ExtResource( 3 )]
+material = SubResource( 8 )
 position = Vector2( 1137.68, 905.448 )
 
 [node name="Alien6" parent="YSort" instance=ExtResource( 3 )]
+material = SubResource( 9 )
 position = Vector2( 1315.13, 618.51 )
 
 [node name="Alien7" parent="YSort" instance=ExtResource( 3 )]
+material = SubResource( 10 )
 position = Vector2( 1266.99, 1257.51 )
 
 [node name="Alien8" parent="YSort" instance=ExtResource( 3 )]
+material = SubResource( 11 )
 position = Vector2( 805.439, 1464.22 )
 
 [node name="Player1" parent="YSort" instance=ExtResource( 2 )]
