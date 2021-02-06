@@ -16,7 +16,7 @@
 [ext_resource path="res://actors/crystals/orange_crystal.tscn" type="PackedScene" id=15]
 [ext_resource path="res://actors/crystals/red_crystal.tscn" type="PackedScene" id=16]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=12]
 code = "shader_type canvas_item;
 
 uniform bool invert = false;
@@ -33,7 +33,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 12 )
 shader_param/invert = false
 
 [sub_resource type="AtlasTexture" id=3]
@@ -72,7 +72,7 @@ region = Rect2( 96, 0, 32, 32 )
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 7 )
 region = Rect2( 32, 0, 32, 32 )
 
@@ -96,7 +96,7 @@ animations = [ {
 "name": "walk_down",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 11 ), SubResource( 19 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "walk_up",
 "speed": 10.0
@@ -112,6 +112,11 @@ script/source = "extends Damageable
 func _ready():
 	yield(self, \"death\")
 	get_tree().change_scene(get_parent().owner.filename)
+
+
+func _input(event):
+	if event.is_action_pressed(\"invincible\"):
+		invincible = not invincible
 "
 
 [sub_resource type="Curve" id=17]
