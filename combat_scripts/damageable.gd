@@ -34,30 +34,31 @@ func set_health(value: float) -> void:
 		health = value
 		return
 	
-	if value < health:
-		emit_signal("damaged", health - value)
-		
+	var difference := health - value
+	if difference > 0:
 		if invincible:
-			return
+			emit_signal("damaged", difference)
 		
-		health = value
-		
-		if health < 0 and not undying:
-			emit_signal("death")
-			return
-		
-		flash()
+		else:
+			health = value
+			emit_signal("damaged", difference)
+			
+			if health < 0 and not undying:
+				emit_signal("death")
+			
+			else:
+				flash()
 	
-	elif value > health:
-		emit_signal("healed", value - health)
-		
+	elif difference < 0:
 		if unhealing:
-			return
+			emit_signal("healed", - difference)
 		
-		health = value
-		
-		if health > max_health:
-			health = max_health
+		else:
+			health = value
+			emit_signal("healed", - difference)
+			
+			if health > max_health:
+				health = max_health
 
 
 func set_undying(value: bool) -> void:
