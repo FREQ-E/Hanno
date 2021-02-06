@@ -50,6 +50,27 @@ tile_data = PoolIntArray( -262136, 4, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 6, 3, 0, 10,
 [node name="Alien1" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 369.37, 413.689 )
 
+[node name="Alien2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 523.221, 533.561 )
+
+[node name="Alien3" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 913.041, 591.137 )
+
+[node name="Alien4" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 448.655, 858.254 )
+
+[node name="Alien5" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 1137.68, 905.448 )
+
+[node name="Alien6" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 1315.13, 618.51 )
+
+[node name="Alien7" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 1266.99, 1257.51 )
+
+[node name="Alien8" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 805.439, 1464.22 )
+
 [node name="Player1" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 792.519, 400 )
 

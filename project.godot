@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://base_scripts/classic_character_2d.gd"
 }, {
+"base": "Node",
+"class": "CrowGoto",
+"language": "GDScript",
+"path": "res://ai/crow_goto.gd"
+}, {
 "base": "Area2D",
 "class": "CrystalBody",
 "language": "GDScript",
@@ -125,6 +130,7 @@ _global_script_class_icons={
 "Character2D": "",
 "CharacterAnimator": "",
 "ClassicCharacter2D": "",
+"CrowGoto": "",
 "CrystalBody": "",
 "CrystalManager": "",
 "DamageHue": "",

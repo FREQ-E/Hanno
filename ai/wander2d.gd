@@ -11,6 +11,7 @@ export var revolve_around_origin := false				# if true, will wander around the o
 
 var timer := Timer.new()
 
+onready var character = get_parent().get_parent()
 onready var original_origin: Vector2 = get_parent().get_parent().global_transform.origin
 
 
@@ -21,10 +22,15 @@ func _enter_tree():
 	timer.connect("timeout", self, "continue_loop")
 
 
+func _ready():
+	set_process(false)
+
+
 func _loop() -> void:
 	get_parent().goto.one_shot = true
 	get_parent().goto.speed = speed
 	get_parent().goto.connect("finished", self, "continue_loop")
+	set_process(true)
 	
 	while active:
 		if wander_pause > 0:
@@ -41,4 +47,11 @@ func _loop() -> void:
 	
 	get_parent().goto.enabled = false
 	get_parent().goto.disconnect("finished", self, "continue_loop")
+	set_process(false)
 	emit_signal("loop_finished")
+
+
+func _process(_delta):
+	if character.is_on_wall():
+		get_parent().goto.enabled = false
+		continue_loop()

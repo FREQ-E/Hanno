@@ -4,7 +4,7 @@
 [ext_resource path="res://actors/aliens/Alien.png" type="Texture" id=2]
 [ext_resource path="res://actors/aliens/enemy_shooting.gd" type="Script" id=3]
 [ext_resource path="res://ai/wander2d.gd" type="Script" id=4]
-[ext_resource path="res://ai/goto.gd" type="Script" id=5]
+[ext_resource path="res://ai/crow_goto.gd" type="Script" id=5]
 [ext_resource path="res://ai/trigger_untrigger.gd" type="Script" id=6]
 [ext_resource path="res://ai/agro2d.gd" type="Script" id=7]
 [ext_resource path="res://combat_scripts/damageable.gd" type="Script" id=8]
@@ -12,7 +12,6 @@
 [ext_resource path="res://combat_scripts/damage_hue.gd" type="Script" id=10]
 [ext_resource path="res://ai/node_sight2d.gd" type="Script" id=11]
 [ext_resource path="res://actors/spawn_instance.gd" type="Script" id=12]
-
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 37.2074
@@ -41,12 +40,12 @@ script = ExtResource( 11 )
 
 [node name="EnemyFlag" type="Node" parent="."]
 
-[node name="Goto" type="Node" parent="."]
+[node name="CrowGoto" type="Node" parent="."]
 script = ExtResource( 5 )
-enabled = true
 
 [node name="WanderAgro" type="Node" parent="."]
 script = ExtResource( 6 )
+goto_path = NodePath("../CrowGoto")
 
 [node name="Wander2D" type="Node" parent="WanderAgro"]
 script = ExtResource( 4 )
