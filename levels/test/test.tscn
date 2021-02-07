@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://levels/floor1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://levels/objects_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://levels/respawn_manager.gd" type="Script" id=5]
 [ext_resource path="res://sounds/Hanno Theme 4.wav" type="AudioStream" id=6]
+[ext_resource path="res://levels/crashed ship.png" type="Texture" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -99,6 +100,16 @@ cell_size = Vector2( 128, 128 )
 centered_textures = true
 format = 1
 tile_data = PoolIntArray( -262136, 4, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 6, 3, 0, 10, 3, 0, 131085, 2, 0, 131086, 2, 0, 196608, 3, 0, 196620, 3, 0, 196621, 2, 0, 262144, 3, 0, 262155, 2, 0, 262156, 3, 0, 327680, 3, 0, 327691, 2, 0, 327692, 3, 0, 393216, 3, 0, 393228, 3, 0, 458752, 3, 0, 458758, 5, 0, 458764, 3, 0, 524300, 3, 0, 589824, 3, 0, 589836, 3, 0, 655360, 3, 0, 655372, 3, 0, 720896, 3, 0, 720908, 3, 0, 851970, 3, 0, 851971, 3, 0, 851972, 3, 0, 851973, 3, 0, 851974, 3, 0, 851975, 3, 0, 851976, 3, 0, 851977, 3, 0 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Floor/Objects"]
+
+[node name="crashed ship" type="Sprite" parent="Floor/Objects/StaticBody2D"]
+position = Vector2( 773, 870 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Floor/Objects/StaticBody2D"]
+polygon = PoolVector2Array( 784, 720, 848, 792, 915.571, 824.489, 963.142, 888.167, 943.664, 957.464, 868.748, 957.838, 869.872, 1008.78, 848, 1024, 816, 1008, 800.201, 987.805, 742.891, 988.179, 728, 1008, 704, 1024, 676.965, 1005.41, 676.965, 958.213, 601.675, 956.34, 584, 888, 632, 824, 696, 792, 760, 720 )
 
 [node name="YSort" type="YSort" parent="."]
 script = ExtResource( 5 )
