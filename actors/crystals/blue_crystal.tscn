@@ -7,7 +7,10 @@ script/source = "extends CrystalBody
 
 
 func _handle_body_entered(body: Node) -> void:
-	if body == player:
+	if body is StaticBody or body is TileMap:
+		queue_free()
+	
+	elif body == player:
 		player.get_node(\"MovementInput2D\").stamina += value
 		queue_free()
 "
@@ -39,7 +42,7 @@ animations = [ {
 "Crystals",
 ]]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 3
 script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

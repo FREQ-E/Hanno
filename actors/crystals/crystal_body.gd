@@ -13,6 +13,9 @@ func _ready():
 
 
 func _handle_body_entered(body: Node) -> void:
-	if body == player:
+	if body is StaticBody or body is TileMap:
+		queue_free()
+	
+	elif body == player:
 		player.get_node("CrystalManager").crystals += value
 		queue_free()
