@@ -43,7 +43,7 @@ func set_health(value: float) -> void:
 			health = value
 			emit_signal("damaged", difference)
 			
-			if health < 0 and not undying:
+			if health <= 0 and not undying:
 				emit_signal("death")
 			
 			else:
