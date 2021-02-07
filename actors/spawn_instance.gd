@@ -5,6 +5,7 @@ extends VisibilityNotifier2D
 export var distance_check := true
 export var max_distance := 5000.0
 export var spawn_check := true
+export var area_check := true
 export var auto_area := true
 
 var player: Node2D
@@ -13,10 +14,14 @@ var player: Node2D
 func _ready():
 	set_process(false)
 	if spawn_check and get_parent().owner == null:
+		print(get_parent().name)
 		get_parent().hide()
 		var area: Area2D
 		
-		if auto_area:
+		if not area_check:
+			pass
+		
+		elif auto_area:
 			area = Area2D.new()
 			var shape_node := CollisionShape2D.new()
 			var shape := RectangleShape2D.new()
@@ -33,7 +38,7 @@ func _ready():
 		yield(get_tree(), "idle_frame")
 		yield(get_tree(), "idle_frame")
 		
-		if is_on_screen() or not area.get_overlapping_bodies().empty():
+		if is_on_screen() or (area_check and not area.get_overlapping_bodies().empty()):
 			get_parent().queue_free()
 			return
 		

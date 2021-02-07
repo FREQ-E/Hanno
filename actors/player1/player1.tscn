@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://base_scripts/movement_input_2d.gd" type="Script" id=2]
+[ext_resource path="res://actors/player1/player shooting sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://actors/player1/Side-Sheet.png" type="Texture" id=4]
 [ext_resource path="res://actors/character_animator.gd" type="Script" id=5]
 [ext_resource path="res://actors/player1/Front-Sheet.png" type="Texture" id=6]
@@ -16,7 +17,7 @@
 [ext_resource path="res://actors/crystals/orange_crystal.tscn" type="PackedScene" id=15]
 [ext_resource path="res://actors/crystals/red_crystal.tscn" type="PackedScene" id=16]
 
-[sub_resource type="Shader" id=12]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool invert = false;
@@ -33,7 +34,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 12 )
+shader = SubResource( 1 )
 shader_param/invert = false
 
 [sub_resource type="AtlasTexture" id=3]
@@ -53,35 +54,35 @@ atlas = ExtResource( 4 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 7 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 7 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 7 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 7 )
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 6 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 6 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 6 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=15]
@@ -93,19 +94,19 @@ animations = [ {
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
-"name": "walk_down",
+"name": "walk_up",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 19 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
-"name": "walk_up",
+"name": "walk_down",
 "speed": 10.0
 } ]
 
 [sub_resource type="CircleShape2D" id=16]
 radius = 32.9877
 
-[sub_resource type="GDScript" id=18]
+[sub_resource type="GDScript" id=17]
 script/source = "extends Damageable
 
 
@@ -119,7 +120,7 @@ func _input(event):
 		invincible = not invincible
 "
 
-[sub_resource type="Curve" id=17]
+[sub_resource type="Curve" id=18]
 max_value = 4.0
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 1, Vector2( 0.251986, 0 ), 0.0, 4.36139, 1, 1, Vector2( 0.952347, 3.05455 ), 4.36139, 19.8402, 1, 1, Vector2( 1, 4 ), 19.8402, 0.0, 1, 0 ]
 
@@ -136,7 +137,7 @@ position = Vector2( 0, -15.801 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 15 )
 animation = "walk_down"
-frame = 3
+frame = 1
 playing = true
 script = ExtResource( 5 )
 
@@ -152,11 +153,12 @@ dash_speed = 2000.0
 [node name="PlayerShooting" type="Node2D" parent="."]
 script = ExtResource( 9 )
 fire_rate = 0.35
+sound = ExtResource( 3 )
 
 [node name="UI1" parent="." instance=ExtResource( 8 )]
 
 [node name="Damageable" type="Node" parent="."]
-script = SubResource( 18 )
+script = SubResource( 17 )
 
 [node name="Targets" type="Node2D" parent="."]
 position = Vector2( 0, -142.128 )
@@ -178,4 +180,4 @@ script = ExtResource( 10 )
 [node name="LocalSpawner" type="Node" parent="."]
 script = ExtResource( 11 )
 scenes = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ]
-probability_curve = SubResource( 17 )
+probability_curve = SubResource( 18 )
