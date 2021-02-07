@@ -16,6 +16,7 @@ func _handle_collision(body: Node) -> void:
 	sound_player.transform = transform
 	sound_player.stream = sounds[round(rand_range(0, sounds.size() - 1))]
 	sound_player.autoplay = true
+	# warning-ignore:return_value_discarded
 	sound_player.connect("finished", sound_player, "queue_free")
 	sound_player.volume_db = extra_db
 	get_parent().add_child(sound_player)

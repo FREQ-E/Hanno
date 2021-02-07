@@ -4,7 +4,7 @@
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/aliens/alien1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/objects_tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://levels/respawn_manager.gd" type="Script" id=5]
+[ext_resource path="res://levels/test/instance_manager.gd" type="Script" id=5]
 [ext_resource path="res://sounds/Hanno Theme 4.wav" type="AudioStream" id=6]
 [ext_resource path="res://levels/crashed ship.png" type="Texture" id=7]
 
@@ -113,6 +113,7 @@ polygon = PoolVector2Array( 784, 720, 848, 792, 915.571, 824.489, 963.142, 888.1
 
 [node name="YSort" type="YSort" parent="."]
 script = ExtResource( 5 )
+preload_scene_path = [ "res://actors/aliens/alien1.tscn" ]
 
 [node name="Alien1" parent="YSort" instance=ExtResource( 3 )]
 material = SubResource( 2 )

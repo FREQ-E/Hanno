@@ -10,6 +10,7 @@ export(PackedScene) var bullet_scene := preload("res://actors/aliens/enemy_bulle
 
 var target: Node2D
 var can_fire := true
+var timer := Timer.new()
 
 onready var firing_angle := deg2rad(firing_angle_degrees)
 onready var trigger_node = get_node(trigger_node_path)
@@ -20,10 +21,17 @@ func _ready():
 	trigger_node.connect("triggered", self, "update_target")
 	trigger_node.connect("untriggered", self, "set_process", [false])
 	set_process(false)
+	timer.one_shot = true
+	timer.connect("timeout", self, "reload")
+	add_child(timer)
 
 
 func update_target() -> void:
 	target = trigger_node.target
+
+
+func reload() -> void:
+	can_fire = true
 
 
 func _process(_delta):
@@ -53,5 +61,4 @@ func _process(_delta):
 	bullet_instance.linear_velocity = dir * bullet_speed
 	get_tree().current_scene.add_child(bullet_instance)
 	can_fire = false
-	yield(get_tree().create_timer(fire_rate), "timeout")
-	can_fire = true
+	timer.start(fire_rate)

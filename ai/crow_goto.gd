@@ -31,6 +31,10 @@ func set_enabled(value: bool) -> void:
 	set_process(value)
 
 
+func _ready():
+	_is_ready = true
+
+
 func _process(_delta):
 	if target_origin == null:
 		return

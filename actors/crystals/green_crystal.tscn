@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://actors/spawn_instance.gd" type="Script" id=2]
 [ext_resource path="res://actors/crystals/Green Crystal.png" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
@@ -45,11 +44,6 @@ script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
-
-[node name="SpawnChecker" type="VisibilityNotifier2D" parent="."]
-scale = Vector2( 1.67931, 2.45049 )
-rect = Rect2( -20, -20, 40, 40 )
-script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )

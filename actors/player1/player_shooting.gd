@@ -41,6 +41,7 @@ func _process(_delta):
 	var sound_player := AudioStreamPlayer.new()
 	sound_player.stream = sound
 	sound_player.autoplay = true
+	# warning-ignore:return_value_discarded
 	sound_player.connect("finished", sound_player, "queue_free")
 	add_child(sound_player)
 	yield(get_tree().create_timer(fire_rate), "timeout")

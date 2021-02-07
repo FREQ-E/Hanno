@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=1]
 [ext_resource path="res://actors/aliens/Alien.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://ai/trigger_untrigger.gd" type="Script" id=6]
 [ext_resource path="res://ai/agro2d.gd" type="Script" id=7]
 [ext_resource path="res://actors/death_handler.gd" type="Script" id=8]
-[ext_resource path="res://actors/respawn_flag.gd" type="Script" id=9]
 [ext_resource path="res://combat_scripts/damage_hue.gd" type="Script" id=10]
 [ext_resource path="res://ai/node_sight2d.gd" type="Script" id=11]
 [ext_resource path="res://actors/spawn_instance.gd" type="Script" id=12]
@@ -85,9 +84,5 @@ script = ExtResource( 10 )
 [node name="EnemyShooting" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
-[node name="SpawnChecker" type="VisibilityNotifier2D" parent="."]
+[node name="SpawnInstance" type="VisibilityNotifier2D" parent="."]
 script = ExtResource( 12 )
-area_check = false
-
-[node name="RespawnFlag" type="Node" parent="."]
-script = ExtResource( 9 )

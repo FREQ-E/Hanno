@@ -41,6 +41,9 @@ func _loop() -> void:
 		get_parent().goto.target_origin = target.global_transform.origin
 		yield(self, "_continue_loop")
 		
+		if not is_inside_tree():
+			yield(self, "tree_entered")
+		
 		if not active:
 			break
 		

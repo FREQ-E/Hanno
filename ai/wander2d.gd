@@ -15,15 +15,12 @@ onready var character = get_parent().get_parent()
 onready var original_origin: Vector2 = get_parent().get_parent().global_transform.origin
 
 
-func _enter_tree():
+func _ready():
+	set_process(false)
 	add_child(timer)
 	timer.one_shot = true
 	# warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "continue_loop")
-
-
-func _ready():
-	set_process(false)
 
 
 func _loop() -> void:

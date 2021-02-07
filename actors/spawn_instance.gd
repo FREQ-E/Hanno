@@ -1,56 +1,58 @@
 class_name SpawnInstance
-extends VisibilityNotifier2D
+extends Node
 
 
-export var distance_check := true
+export var min_distance := 3000.0
 export var max_distance := 5000.0
-export var spawn_check := true
-export var area_check := true
-export var auto_area := true
+export var area_path: NodePath
+export var respawn := true
 
-var player: Node2D
+var player: Node
+var instance_manager: InstanceManager
+
+var _has_spawned := false
+
+onready var original_transform = get_parent().transform
 
 
 func _ready():
-	set_process(false)
-	if spawn_check and get_parent().owner == null:
-		print(get_parent().name)
+	if get_parent().owner == null:
+		set_process(false)
 		get_parent().hide()
-		var area: Area2D
-		
-		if not area_check:
-			pass
-		
-		elif auto_area:
-			area = Area2D.new()
-			var shape_node := CollisionShape2D.new()
-			var shape := RectangleShape2D.new()
-			
-			shape.extents = rect.size / 2
-			shape_node.shape = shape
-			shape_node.transform.origin = rect.position + shape.extents
-			area.add_child(shape_node)
-			add_child(area)
-		
-		else:
-			area = $Area
 		
 		yield(get_tree(), "idle_frame")
 		yield(get_tree(), "idle_frame")
 		
-		if is_on_screen() or (area_check and not area.get_overlapping_bodies().empty()):
+		if not area_path.is_empty() and get_node(area_path).get_overlapping_bodies().empty():
 			get_parent().queue_free()
 			return
 		
+		instance_manager = get_parent().get_parent()
+		player = instance_manager.player
+		
+		if player.global_transform.origin.distance_to(get_parent().global_transform.origin) < min_distance:
+			instance_manager.hold(self)
+			yield(self, "tree_entered")
+		
 		get_parent().show()
+		set_process(true)
 	
-	if distance_check:
-		player = GlobalFuncs.yield_and_get_group("Player")[0]
-		# warning-ignore-all:return_value_discarded
-		connect("screen_exited", self, "set_process", [true])
-		connect("screen_entered", self, "set_process", [false])
+	else:
+		instance_manager = get_parent().get_parent()
+		
+		if instance_manager.player == null:
+			yield(instance_manager, "ready")
+		
+		player = instance_manager.player
+	
+	_has_spawned = true
 
 
 func _process(_delta):
-	if global_transform.origin.distance_to(player.global_transform.origin) >= max_distance:
+	if get_parent().global_transform.origin.distance_to(player.global_transform.origin) >= max_distance:
 		get_parent().queue_free()
+
+
+func _exit_tree():
+	if _has_spawned and respawn:
+		instance_manager.respawn_parent(self)
