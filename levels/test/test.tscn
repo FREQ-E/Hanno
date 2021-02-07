@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://levels/floor1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
@@ -83,9 +83,6 @@ resource_local_to_scene = true
 shader = SubResource( 10 )
 shader_param/invert = false
 
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 10, 1310.31 )
-
 [node name="Node2D" type="Node2D"]
 
 [node name="Floor" type="TileMap" parent="."]
@@ -155,28 +152,6 @@ position = Vector2( 792.519, 400 )
 current = true
 zoom = Vector2( 1.8, 1.8 )
 smoothing_enabled = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 2147483648
-collision_mask = 2147483648
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -517.243, 768.314 )
-shape = SubResource( 12 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 2053.87, 768.314 )
-shape = SubResource( 12 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 770.201, -511.58 )
-rotation = -1.57079
-shape = SubResource( 12 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 764.538, 2051.98 )
-rotation = -1.57079
-shape = SubResource( 12 )
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

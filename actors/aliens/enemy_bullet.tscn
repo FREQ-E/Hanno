@@ -31,3 +31,8 @@ position = Vector2( -0.000268213, -0.00991464 )
 rotation = -1.5708
 scale = Vector2( 0.494103, 0.494103 )
 shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="queue_free"]
