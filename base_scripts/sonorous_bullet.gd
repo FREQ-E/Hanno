@@ -12,11 +12,11 @@ func _handle_collision(body: Node) -> void:
 	if body.is_in_group(target_group):
 		body.get_node('Damageable').health -= damage
 	
-	var sound_player := AudioStreamPlayer2D.new()
-	sound_player.transform = transform
-	sound_player.stream = sounds[round(rand_range(0, sounds.size() - 1))]
-	sound_player.autoplay = true
-	# warning-ignore:return_value_discarded
-	sound_player.connect("finished", sound_player, "queue_free")
-	sound_player.volume_db = extra_db
-	get_parent().add_child(sound_player)
+		var sound_player := AudioStreamPlayer2D.new()
+		sound_player.transform = transform
+		sound_player.stream = sounds[round(rand_range(0, sounds.size() - 1))]
+		sound_player.autoplay = true
+		# warning-ignore:return_value_discarded
+		sound_player.connect("finished", sound_player, "queue_free")
+		sound_player.volume_db = extra_db
+		get_parent().add_child(sound_player)
