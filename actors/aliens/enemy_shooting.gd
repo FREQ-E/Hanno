@@ -22,6 +22,7 @@ func _ready():
 	trigger_node.connect("untriggered", self, "set_process", [false])
 	set_process(false)
 	timer.one_shot = true
+	# warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "reload")
 	add_child(timer)
 

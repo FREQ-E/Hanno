@@ -13,7 +13,7 @@ func _ready():
 
 
 func _handle_body_entered(body: Node) -> void:
-	if body is StaticBody or body is TileMap:
+	if body is StaticBody2D or body is TileMap:
 		queue_free()
 	
 	elif body == player:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://actors/aliens/enemybullet.png" type="Texture" id=1]
-[ext_resource path="res://base_scripts/base_bullet.gd" type="Script" id=2]
+[ext_resource path="res://actors/aliens/player_hit_sound.wav" type="AudioStream" id=2]
+[ext_resource path="res://base_scripts/sonorous_bullet.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 65.5485
@@ -18,8 +19,9 @@ contact_monitor = true
 can_sleep = false
 linear_damp = 0.0
 angular_damp = 0.0
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 target_group = "Player"
+sounds = [ ExtResource( 2 ) ]
 
 [node name="EnemyBullet" type="Sprite" parent="."]
 position = Vector2( -1.58211, -1.70039 )

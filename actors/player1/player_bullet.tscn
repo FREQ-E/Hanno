@@ -2,10 +2,12 @@
 
 [ext_resource path="res://actors/player1/characterbullet.png" type="Texture" id=1]
 [ext_resource path="res://base_scripts/sonorous_bullet.gd" type="Script" id=2]
-[ext_resource path="res://sounds/bullet impact sound 2.wav" type="AudioStream" id=3]
-[ext_resource path="res://sounds/bullet impact sound 4.wav" type="AudioStream" id=4]
-[ext_resource path="res://sounds/bullet impact sound 3.wav" type="AudioStream" id=5]
-[ext_resource path="res://sounds/bullet impact sound 1.wav" type="AudioStream" id=6]
+[ext_resource path="res://actors/player1/bullet impact sound 2.wav" type="AudioStream" id=3]
+[ext_resource path="res://actors/player1/bullet impact sound 4.wav" type="AudioStream" id=4]
+[ext_resource path="res://actors/player1/bullet impact sound 3.wav" type="AudioStream" id=5]
+[ext_resource path="res://actors/player1/bullet impact sound 1.wav" type="AudioStream" id=6]
+
+
 
 [node name="PlayerBullet" type="RigidBody2D"]
 position = Vector2( 0, 0.0834274 )
