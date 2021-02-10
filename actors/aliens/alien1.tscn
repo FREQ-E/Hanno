@@ -11,7 +11,7 @@
 [ext_resource path="res://actors/aliens/enemy_shooting.gd" type="Script" id=9]
 [ext_resource path="res://combat_scripts/damage_hue.gd" type="Script" id=10]
 [ext_resource path="res://ai/node_sight2d.gd" type="Script" id=11]
-[ext_resource path="res://actors/spawn_instance.gd" type="Script" id=12]
+[ext_resource path="res://actors/spawn_flag.gd" type="Script" id=12]
 [ext_resource path="res://actors/aliens/alien1_death.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Shader" id=1]

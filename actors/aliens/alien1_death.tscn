@@ -6,3 +6,4 @@
 stream = ExtResource( 1 )
 volume_db = 5.0
 autoplay = true
+[connection signal="finished" from="." to="." method="queue_free"]

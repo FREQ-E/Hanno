@@ -84,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ai/goto.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "InstanceManager",
 "language": "GDScript",
 "path": "res://levels/test/instance_manager.gd"
@@ -115,9 +115,9 @@ _global_script_classes=[ {
 "path": "res://base_scripts/sonorous_bullet.gd"
 }, {
 "base": "Node",
-"class": "SpawnInstance",
+"class": "SpawnFlag",
 "language": "GDScript",
-"path": "res://actors/spawn_instance.gd"
+"path": "res://actors/spawn_flag.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -161,7 +161,7 @@ _global_script_class_icons={
 "NodeSight2D": "",
 "PlayerShooting": "",
 "SonorousBullet": "",
-"SpawnInstance": "",
+"SpawnFlag": "",
 "State": "",
 "StateMachine": "",
 "TriggerUntrigger": "",
