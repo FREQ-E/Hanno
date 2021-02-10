@@ -45,7 +45,7 @@ radius = 45.4747
 ]]
 material = SubResource( 2 )
 collision_layer = 4
-collision_mask = 7
+collision_mask = 524295
 script = ExtResource( 3 )
 
 [node name="Possible_Alien" type="Sprite" parent="."]
@@ -59,7 +59,7 @@ shape = SubResource( 3 )
 
 [node name="NodeSight" type="RayCast2D" parent="."]
 enabled = true
-collision_mask = 2147483651
+collision_mask = 2148007939
 script = ExtResource( 11 )
 
 [node name="EnemyFlag" type="Node" parent="."]
