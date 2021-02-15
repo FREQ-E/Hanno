@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://levels/floor1_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
@@ -86,6 +86,9 @@ shader_param/invert = false
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 10, 1000 )
 
+[sub_resource type="CircleShape2D" id=13]
+radius = 345.189
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Floor" type="TileMap" parent="."]
@@ -127,15 +130,15 @@ position = Vector2( 523.221, 533.561 )
 
 [node name="Alien3" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
 material = SubResource( 4 )
-position = Vector2( 913.041, 591.137 )
+position = Vector2( 964.954, 525.066 )
 
 [node name="Alien4" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
 material = SubResource( 5 )
-position = Vector2( 448.655, 858.254 )
+position = Vector2( 361.819, 857.31 )
 
 [node name="Alien5" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
 material = SubResource( 6 )
-position = Vector2( 1137.68, 905.448 )
+position = Vector2( 1214.13, 918.662 )
 
 [node name="Alien6" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
 material = SubResource( 7 )
@@ -184,3 +187,7 @@ shape = SubResource( 12 )
 position = Vector2( 812.686, -119.087 )
 rotation = -1.57079
 shape = SubResource( 12 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 772.807, 880.664 )
+shape = SubResource( 13 )

@@ -3,7 +3,8 @@ extends RigidBody2D
 
 
 export var target_group := "Enemies"
-export var damage := 0.5
+
+var damage: float
 
 
 func _ready():
