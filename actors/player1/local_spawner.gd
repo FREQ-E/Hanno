@@ -10,7 +10,6 @@ export var probability_curve: Curve
 export var min_distance := 1000.0
 export var max_distance := 2000.0
 export var max_instances := 10
-export var spawn_in_ysort := true
 
 var instances: Array
 
@@ -19,9 +18,6 @@ onready var player_origin: Vector2 = get_parent().global_transform.origin
 
 func _ready():
 	var current_scene := get_tree().current_scene
-	
-	if spawn_in_ysort:
-		current_scene = current_scene.get_node("YSort")
 	
 	for _i in range(max_instances):
 		var instance: Node2D = scenes[int(round(probability_curve.interpolate(randf())))].instance()

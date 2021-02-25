@@ -41,7 +41,6 @@ animations = [ {
 [node name="GreenCrystal" type="Area2D" groups=[
 "Crystals",
 ]]
-collision_layer = 0
 collision_mask = 3
 script = SubResource( 1 )
 

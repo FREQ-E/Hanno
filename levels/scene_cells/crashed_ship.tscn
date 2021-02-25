@@ -1,0 +1,155 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://levels/solid color ground.png" type="Texture" id=1]
+[ext_resource path="res://levels/crashed ship.png" type="Texture" id=2]
+[ext_resource path="res://actors/aliens/alien1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://levels/objects_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://levels/instance_manager.gd" type="Script" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform bool invert = false;
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV).rgba;
+	if (invert) {
+		col.r = 1.0 - col.r;
+		col.g = 1.0 - col.g;
+		col.b = 1.0 - col.b;
+	}
+    COLOR.rgba = col.rgba;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/invert = false
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform bool invert = false;
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV).rgba;
+	if (invert) {
+		col.r = 1.0 - col.r;
+		col.g = 1.0 - col.g;
+		col.b = 1.0 - col.b;
+	}
+    COLOR.rgba = col.rgba;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/invert = false
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 1024 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 345.189
+
+[node name="CrashedShip" type="Node2D"]
+
+[node name="solid color ground" type="Sprite" parent="."]
+position = Vector2( 1024, 1024 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+
+[node name="Objects" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 128, 128 )
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( -262136, 4, 0, 2, 3, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 3, 0, 7, 3, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 131072, 0, 0, 131085, 2, 0, 131086, 2, 0, 131087, 3, 0, 196608, 0, 0, 196621, 2, 0, 262144, 0, 0, 262155, 2, 0, 262159, 0, 0, 327680, 0, 0, 327691, 2, 0, 327695, 0, 0, 393216, 3, 0, 393231, 0, 0, 458752, 0, 0, 458758, 5, 0, 458767, 0, 0, 524288, 0, 0, 524303, 3, 0, 589824, 0, 0, 589839, 0, 0, 655360, 0, 0, 655375, 0, 0, 720896, 0, 0, 720911, 0, 0, 786447, 0, 0, 983043, 0, 0, 983044, 0, 0, 983045, 0, 0, 983046, 3, 0, 983048, 3, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 3, 0 )
+
+[node name="InstanceManager" type="Node2D" parent="."]
+script = ExtResource( 5 )
+preload_scene_path = [ "res://actors/aliens/alien1.tscn" ]
+
+[node name="Alien1" parent="InstanceManager" instance=ExtResource( 3 )]
+material = SubResource( 2 )
+position = Vector2( 312.015, 373.353 )
+
+[node name="Alien2" parent="InstanceManager" instance=ExtResource( 3 )]
+material = SubResource( 6 )
+position = Vector2( 685.222, 1533.36 )
+
+[node name="Alien3" parent="InstanceManager" instance=ExtResource( 3 )]
+material = SubResource( 7 )
+position = Vector2( 1487.44, 1504.77 )
+
+[node name="Alien4" parent="InstanceManager" instance=ExtResource( 3 )]
+material = SubResource( 8 )
+position = Vector2( 291.682, 1143.18 )
+
+[node name="Alien5" parent="InstanceManager" instance=ExtResource( 3 )]
+material = SubResource( 9 )
+position = Vector2( 1329.35, 532.69 )
+
+[node name="Alien6" parent="InstanceManager" instance=ExtResource( 3 )]
+material = SubResource( 10 )
+position = Vector2( 1687.57, 1030.5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 524288
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 1024 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 2048, 1024 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1024, 2048 )
+rotation = -1.57079
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1024, 0 )
+rotation = -1.57079
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1024, 1024 )
+shape = SubResource( 4 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 1024, 1024 )
+
+[node name="crashed ship" type="Sprite" parent="StaticBody2D2"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2( -771.518, -869.517 )
+polygon = PoolVector2Array( 784, 720, 848, 792, 915.571, 824.489, 963.142, 888.167, 943.664, 957.464, 868.748, 957.838, 869.872, 1008.78, 848, 1024, 816, 1008, 800.201, 987.805, 742.891, 988.179, 728, 1008, 704, 1024, 676.965, 1005.41, 676.965, 958.213, 601.675, 956.34, 584, 888, 632, 824, 696, 792, 760, 720 )
+__meta__ = {
+"_editor_description_": "By right the position should be (0, 0), but the shape was drawn at the wrong position"
+}

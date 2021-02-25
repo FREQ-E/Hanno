@@ -9,11 +9,12 @@ onready var player: Node = GlobalFuncs.yield_and_get_group("Player")[0]
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	connect("body_entered", self, "_handle_body_entered")
+	connect("body_entered", self, "_handle_node_entered")
+	connect("area_entered", self, "_handle_node_entered")
 
 
-func _handle_body_entered(body: Node) -> void:
-	if body is StaticBody2D or body is TileMap:
+func _handle_node_entered(body: Node) -> void:
+	if body is StaticBody2D or body is TileMap or body is Area2D:
 		queue_free()
 	
 	elif body == player:

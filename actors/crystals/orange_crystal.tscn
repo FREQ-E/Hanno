@@ -29,7 +29,6 @@ animations = [ {
 [node name="OrangeCrystal" type="Area2D" groups=[
 "Crystals",
 ]]
-collision_layer = 0
 collision_mask = 3
 script = ExtResource( 1 )
 
@@ -39,5 +38,5 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 5 )
-frame = 1
+frame = 2
 playing = true

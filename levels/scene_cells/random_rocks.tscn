@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/random_tile_map.gd" type="Script" id=1]
+[ext_resource path="res://levels/solid color ground.png" type="Texture" id=2]
+[ext_resource path="res://levels/objects_tileset.tres" type="TileSet" id=3]
+
+[sub_resource type="OpenSimplexNoise" id=2]
+octaves = 1
+period = 256.0
+
+[sub_resource type="NoiseTexture" id=3]
+width = 2048
+height = 2048
+noise = SubResource( 2 )
+
+[node name="RandomRocks" type="Node2D"]
+
+[node name="solid color ground" type="Sprite" parent="."]
+position = Vector2( 1024, 1024 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+
+[node name="RandomTileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 128, 128 )
+centered_textures = true
+format = 1
+script = ExtResource( 1 )
+thresholds = PoolRealArray( 0.45 )
+
+[node name="RocksNoise" type="Sprite" parent="RandomTileMap"]
+visible = false
+position = Vector2( 1024, 1024 )
+texture = SubResource( 3 )

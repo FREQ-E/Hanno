@@ -1,67 +1,11 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://levels/floor1_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://levels/scene_cells/crashed_ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/player1/player1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/aliens/alien1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://levels/objects_tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://levels/test/instance_manager.gd" type="Script" id=5]
+[ext_resource path="res://levels/scene_cells/random_rocks.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sounds/Hanno Theme 4.wav" type="AudioStream" id=6]
-[ext_resource path="res://levels/crashed ship.png" type="Texture" id=7]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-uniform bool invert = false;
-
-void fragment() {
-    vec4 col = texture(TEXTURE, UV).rgba;
-	if (invert) {
-		col.r = 1.0 - col.r;
-		col.g = 1.0 - col.g;
-		col.b = 1.0 - col.b;
-	}
-    COLOR.rgba = col.rgba;
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=3]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=4]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=5]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=6]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=7]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=8]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=9]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/invert = false
+[ext_resource path="res://levels/scene_tile_map.gd" type="Script" id=8]
+[ext_resource path="res://levels/scene_cells/scene_tileset.tres" type="TileSet" id=9]
 
 [sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
@@ -83,111 +27,29 @@ resource_local_to_scene = true
 shader = SubResource( 10 )
 shader_param/invert = false
 
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 10, 1000 )
-
-[sub_resource type="CircleShape2D" id=13]
-radius = 345.189
-
 [node name="Node2D" type="Node2D"]
 
-[node name="Floor" type="TileMap" parent="."]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 512, 512 )
+[node name="SceneTileMap" type="TileMap" parent="."]
+scale = Vector2( 256, 256 )
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( -65538, 4, 0, -65537, 4, 0, -131072, 4, 0, -131071, 4, 0, -131070, 4, 0, -131069, 4, 0, -131068, 4, 0, -2, 4, 0, -1, 4, 0, -65536, 4, 0, -65535, 4, 0, -65534, 4, 0, -65533, 4, 0, -65532, 4, 0, 65534, 4, 0, 65535, 4, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 131070, 4, 0, 131071, 4, 0, 65536, 4, 0, 65537, 4, 0, 65538, 4, 0, 65539, 4, 0, 65540, 4, 0, 196606, 4, 0, 196607, 4, 0, 131072, 4, 0, 131073, 4, 0, 131074, 4, 0, 131075, 4, 0, 131076, 4, 0, 131085, 2, 0, 131086, 2, 0, 262142, 4, 0, 262143, 4, 0, 196608, 4, 0, 196609, 4, 0, 196610, 4, 0, 196611, 4, 0, 196612, 4, 0, 196620, 2, 0, 196621, 2, 0, 327678, 4, 0, 327679, 4, 0, 262144, 4, 0, 262145, 4, 0, 262146, 4, 0, 262147, 4, 0, 262148, 4, 0, 262155, 2, 0, 262156, 2, 0, 327691, 2, 0 )
-
-[node name="Objects" type="TileMap" parent="Floor"]
-tile_set = ExtResource( 4 )
-cell_size = Vector2( 128, 128 )
-centered_textures = true
-format = 1
-tile_data = PoolIntArray( -262136, 4, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 6, 3, 0, 10, 3, 0, 131085, 2, 0, 131086, 2, 0, 196608, 3, 0, 196620, 3, 0, 196621, 2, 0, 262144, 3, 0, 262155, 2, 0, 262156, 3, 0, 327680, 3, 0, 327691, 2, 0, 327692, 3, 0, 393216, 3, 0, 393228, 3, 0, 458752, 3, 0, 458758, 5, 0, 458764, 3, 0, 524300, 3, 0, 589824, 3, 0, 589836, 3, 0, 655360, 3, 0, 655372, 3, 0, 720896, 3, 0, 720908, 3, 0, 851970, 3, 0, 851971, 3, 0, 851972, 3, 0, 851973, 3, 0, 851974, 3, 0, 851975, 3, 0, 851976, 3, 0, 851977, 3, 0 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Floor/Objects"]
-
-[node name="crashed ship" type="Sprite" parent="Floor/Objects/StaticBody2D"]
-position = Vector2( 773, 870 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Floor/Objects/StaticBody2D"]
-polygon = PoolVector2Array( 784, 720, 848, 792, 915.571, 824.489, 963.142, 888.167, 943.664, 957.464, 868.748, 957.838, 869.872, 1008.78, 848, 1024, 816, 1008, 800.201, 987.805, 742.891, 988.179, 728, 1008, 704, 1024, 676.965, 1005.41, 676.965, 958.213, 601.675, 956.34, 584, 888, 632, 824, 696, 792, 760, 720 )
-
-[node name="YSort" type="YSort" parent="."]
-
-[node name="InstanceManager" type="YSort" parent="YSort"]
-script = ExtResource( 5 )
-preload_scene_path = [ "res://actors/aliens/alien1.tscn" ]
-
-[node name="Alien1" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 2 )
-position = Vector2( 369.37, 413.689 )
-
-[node name="Alien2" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 3 )
-position = Vector2( 523.221, 533.561 )
-
-[node name="Alien3" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 4 )
-position = Vector2( 964.954, 525.066 )
-
-[node name="Alien4" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 5 )
-position = Vector2( 361.819, 857.31 )
-
-[node name="Alien5" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 6 )
-position = Vector2( 1214.13, 918.662 )
-
-[node name="Alien6" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 7 )
-position = Vector2( 1315.13, 618.51 )
-
-[node name="Alien7" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 8 )
-position = Vector2( 1266.99, 1257.51 )
-
-[node name="Alien8" parent="YSort/InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 9 )
-position = Vector2( 805.439, 1464.22 )
-
-[node name="Player1" parent="YSort" instance=ExtResource( 2 )]
-material = SubResource( 11 )
-position = Vector2( 792.519, 400 )
-
-[node name="Camera2D" type="Camera2D" parent="YSort/Player1"]
-current = true
-zoom = Vector2( 1.8, 1.8 )
-smoothing_enabled = true
+tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, 65535, 0, 0, 1, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0 )
+script = ExtResource( 8 )
+scenes = [ ExtResource( 3 ) ]
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -5.0
 autoplay = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 524288
-collision_mask = 0
+[node name="CrashedShip" parent="." instance=ExtResource( 1 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -175.55, 874.626 )
-shape = SubResource( 12 )
+[node name="Player1" parent="." instance=ExtResource( 2 )]
+material = SubResource( 11 )
+position = Vector2( 792.519, 400 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1803.22, 887.325 )
-shape = SubResource( 12 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 814.305, 1890.56 )
-rotation = -1.57079
-shape = SubResource( 12 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 812.686, -119.087 )
-rotation = -1.57079
-shape = SubResource( 12 )
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 772.807, 880.664 )
-shape = SubResource( 13 )
+[node name="Camera2D" type="Camera2D" parent="Player1"]
+current = true
+zoom = Vector2( 1.8, 1.8 )
+smoothing_enabled = true

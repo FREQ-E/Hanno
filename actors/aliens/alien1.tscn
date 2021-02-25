@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://actors/aliens/contact_damage.gd" type="Script" id=1]
 [ext_resource path="res://actors/aliens/Alien.png" type="Texture" id=2]
-[ext_resource path="res://base_scripts/classic_character_2d.gd" type="Script" id=3]
+[ext_resource path="res://actors/base_scripts/character2d.gd" type="Script" id=3]
 [ext_resource path="res://ai/wander2d.gd" type="Script" id=4]
 [ext_resource path="res://ai/crow_goto.gd" type="Script" id=5]
 [ext_resource path="res://ai/trigger_untrigger.gd" type="Script" id=6]
@@ -13,8 +13,9 @@
 [ext_resource path="res://ai/node_sight2d.gd" type="Script" id=11]
 [ext_resource path="res://actors/spawn_flag.gd" type="Script" id=12]
 [ext_resource path="res://actors/aliens/alien1_death.tscn" type="PackedScene" id=13]
+[ext_resource path="res://actors/dynamic_ysort.gd" type="Script" id=14]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
 
 uniform bool invert = false;
@@ -31,7 +32,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 5 )
 shader_param/invert = false
 
 [sub_resource type="CircleShape2D" id=3]
@@ -88,7 +89,7 @@ script = ExtResource( 10 )
 [node name="EnemyShooting" type="Node2D" parent="."]
 script = ExtResource( 9 )
 
-[node name="SpawnInstance" type="VisibilityNotifier2D" parent="."]
+[node name="SpawnInstance" type="Node" parent="."]
 script = ExtResource( 12 )
 
 [node name="ContactDamage" type="Area2D" parent="."]
@@ -96,3 +97,8 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]
 shape = SubResource( 4 )
+
+[node name="DynamicYSort" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -0.658038, -15.7953 )
+scale = Vector2( 5.09387, 5.36722 )
+script = ExtResource( 14 )
