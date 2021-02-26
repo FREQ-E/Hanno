@@ -4,14 +4,14 @@
 [ext_resource path="res://levels/solid color ground.png" type="Texture" id=2]
 [ext_resource path="res://levels/objects_tileset.tres" type="TileSet" id=3]
 
-[sub_resource type="OpenSimplexNoise" id=2]
+[sub_resource type="OpenSimplexNoise" id=1]
 octaves = 1
 period = 256.0
 
-[sub_resource type="NoiseTexture" id=3]
+[sub_resource type="NoiseTexture" id=2]
 width = 2048
 height = 2048
-noise = SubResource( 2 )
+noise = SubResource( 1 )
 
 [node name="RandomRocks" type="Node2D"]
 
@@ -26,9 +26,9 @@ cell_size = Vector2( 128, 128 )
 centered_textures = true
 format = 1
 script = ExtResource( 1 )
-thresholds = PoolRealArray( 0.45 )
+thresholds = PoolRealArray( 0.55 )
 
 [node name="RocksNoise" type="Sprite" parent="RandomTileMap"]
 visible = false
 position = Vector2( 1024, 1024 )
-texture = SubResource( 3 )
+texture = SubResource( 2 )

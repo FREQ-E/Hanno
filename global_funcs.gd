@@ -1,6 +1,9 @@
 extends Node
 
 
+var rng := RandomNumberGenerator.new()
+
+
 func yield_and_get_group(group: String) -> Array:
 	# this function allows a node to try and get the nodes in a group
 	# it will wait until the group exists

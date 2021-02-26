@@ -6,13 +6,8 @@
 script/source = "extends CrystalBody
 
 
-func _handle_body_entered(body: Node) -> void:
-	if body is StaticBody or body is TileMap:
-		queue_free()
-	
-	elif body == player:
+func _handle_player_entered() -> void:
 		player.get_node(\"MovementInput2D\").stamina += value
-		queue_free()
 "
 
 [sub_resource type="RectangleShape2D" id=2]

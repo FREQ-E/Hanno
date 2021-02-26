@@ -4,16 +4,12 @@ extends TileMap
 
 export var max_size := Vector2(16, 16)		# the max number of cells in each axis
 export var thresholds: PoolRealArray
-export var master_seed: int
 
 
 func _ready():
-	var rng := RandomNumberGenerator.new()
-	rng.seed = master_seed
-	
 	for idx in range(get_child_count()):
 		var noise: OpenSimplexNoise = get_child(idx).texture.noise
-		noise.seed = rng.randi()
+		noise.seed = GlobalFuncs.rng.randi()
 
 		for x in range(int(max_size.x)):
 			for y in range(int(max_size.y)):
@@ -21,3 +17,4 @@ func _ready():
 				
 				if noise.get_noise_2d(real_coords.x, real_coords.y) >= thresholds[idx]:
 					set_cell(x, y, idx)
+	

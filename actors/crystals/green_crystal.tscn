@@ -6,13 +6,8 @@
 script/source = "extends CrystalBody
 
 
-func _handle_body_entered(body: Node) -> void:
-	if body is StaticBody or body is TileMap:
-		queue_free()
-	
-	elif body == player:
+func _handle_player_entered() -> void:
 		player.get_node(\"Damageable\").health += value
-		queue_free()
 "
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -50,4 +45,5 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
+frame = 2
 playing = true

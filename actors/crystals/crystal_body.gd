@@ -15,8 +15,13 @@ func _ready():
 
 func _handle_node_entered(body: Node) -> void:
 	if body is StaticBody2D or body is TileMap or body is Area2D:
-		queue_free()
+		pass
 	
 	elif body == player:
-		player.get_node("CrystalManager").crystals += value
-		queue_free()
+		_handle_player_entered()
+	
+	queue_free()
+
+
+func _handle_player_entered() -> void:
+	player.get_node("CrystalManager").crystals += value
