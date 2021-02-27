@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://actors/aliens/enemy death sound.wav" type="AudioStream" id=1]
+
+[node name="Alien1Death" type="AudioStreamPlayer2D"]
+stream = ExtResource( 1 )
+volume_db = 5.0
+autoplay = true
+[connection signal="finished" from="." to="." method="queue_free"]

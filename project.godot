@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "ContactDamage",
 "language": "GDScript",
-"path": "res://actors/aliens/contact_damage.gd"
+"path": "res://actors/contact_damage.gd"
 }, {
 "base": "Node",
 "class": "CrowGoto",
@@ -189,6 +189,10 @@ config/icon="res://icon.png"
 [autoload]
 
 GlobalFuncs="*res://global_funcs.gd"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 

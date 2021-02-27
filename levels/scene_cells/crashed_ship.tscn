@@ -1,10 +1,71 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://levels/solid color ground.png" type="Texture" id=1]
 [ext_resource path="res://levels/crashed ship.png" type="Texture" id=2]
 [ext_resource path="res://actors/aliens/alien1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/objects_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://levels/instance_manager.gd" type="Script" id=5]
+[ext_resource path="res://actors/snake/snake1.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform bool invert = false;
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV).rgba;
+	if (invert) {
+		col.r = 1.0 - col.r;
+		col.g = 1.0 - col.g;
+		col.b = 1.0 - col.b;
+	}
+    COLOR.rgba = col.rgba;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = SubResource( 2 )
+shader_param/invert = false
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform bool invert = false;
+
+void fragment() {
+    vec4 col = texture(TEXTURE, UV).rgba;
+	if (invert) {
+		col.r = 1.0 - col.r;
+		col.g = 1.0 - col.g;
+		col.b = 1.0 - col.b;
+	}
+    COLOR.rgba = col.rgba;
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/invert = false
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/invert = false
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -21,55 +82,15 @@ void fragment() {
     COLOR.rgba = col.rgba;
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=10]
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/invert = false
 
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
-
-uniform bool invert = false;
-
-void fragment() {
-    vec4 col = texture(TEXTURE, UV).rgba;
-	if (invert) {
-		col.r = 1.0 - col.r;
-		col.g = 1.0 - col.g;
-		col.b = 1.0 - col.b;
-	}
-    COLOR.rgba = col.rgba;
-}"
-
-[sub_resource type="ShaderMaterial" id=4]
-resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=5]
-resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=6]
-resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=7]
-resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/invert = false
-
-[sub_resource type="ShaderMaterial" id=8]
-resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/invert = false
-
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 10, 2048 )
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=12]
 radius = 345.189
 
 [node name="CrashedShip" type="Node2D"]
@@ -88,32 +109,36 @@ tile_data = PoolIntArray( -262136, 4, 0, 2, 3, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 
 
 [node name="InstanceManager" type="Node2D" parent="."]
 script = ExtResource( 5 )
-preload_scene_path = [ "res://actors/aliens/alien1.tscn" ]
+preload_scene_path = [ "res://actors/aliens/alien1.tscn", "res://actors/snake/snake1.tscn" ]
 respawn_free_distance = 6000.0
 
 [node name="Alien1" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 2 )
+material = SubResource( 3 )
 position = Vector2( 312.015, 373.353 )
 
 [node name="Alien2" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 4 )
+material = SubResource( 5 )
 position = Vector2( 685.222, 1533.36 )
 
 [node name="Alien3" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 5 )
+material = SubResource( 6 )
 position = Vector2( 1487.44, 1504.77 )
 
 [node name="Alien4" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 6 )
+material = SubResource( 7 )
 position = Vector2( 291.682, 1143.18 )
 
 [node name="Alien5" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 7 )
+material = SubResource( 8 )
 position = Vector2( 1329.35, 532.69 )
 
 [node name="Alien6" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 8 )
+material = SubResource( 9 )
 position = Vector2( 1687.57, 1030.5 )
+
+[node name="Snake1" parent="InstanceManager" instance=ExtResource( 6 )]
+material = SubResource( 10 )
+position = Vector2( 389.709, 658.888 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 524288
@@ -121,25 +146,25 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -1024, 1024 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 3072, 1024 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 1024, 3072 )
 rotation = -1.57079
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 1024, -1024 )
 rotation = -1.57079
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 1024, 1024 )
-shape = SubResource( 10 )
+shape = SubResource( 12 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2( 1024, 1024 )
