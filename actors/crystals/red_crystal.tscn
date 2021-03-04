@@ -14,9 +14,8 @@ func _handle_body_entered(body: Node) -> void:
 		queue_free()
 	
 	elif body == player:
-		var player_shooting: PlayerShooting = player.get_node(\"PlayerShooting\")
-		player_shooting.damage = value
-		player_shooting.buff_timer = buff_time
+		player.damage_buff = value
+		player.buff_timer = buff_time
 		queue_free()
 "
 
@@ -48,6 +47,7 @@ animations = [ {
 ]]
 collision_mask = 3
 script = SubResource( 1 )
+value = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -55,5 +55,4 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
 frames = SubResource( 6 )
-frame = 1
 playing = true

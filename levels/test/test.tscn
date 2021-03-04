@@ -48,6 +48,17 @@ autoplay = true
 [node name="Player1" parent="." instance=ExtResource( 2 )]
 material = SubResource( 2 )
 position = Vector2( 792.519, 400 )
+acceleration_weight = 12.0
+brake_weight = 18.0
+default_speed = 770.0
+max_stamina = 5.0
+stamina_regen_rate = 0.5
+stamina_regen_delay = 1.0
+dash_stamina_usage = 1.0
+fast_speed = 1170.0
+dash_speed = 2000.0
+dash_duration = 0.1
+dash_buffer = 0.2
 
 [node name="Camera2D" type="Camera2D" parent="Player1"]
 current = true

@@ -24,4 +24,4 @@ func _handle_node_entered(body: Node) -> void:
 
 
 func _handle_player_entered() -> void:
-	player.get_node("CrystalManager").crystals += value
+	player.crystals += value

@@ -11,13 +11,13 @@ script/source = "# This is a built in script for the health bar
 extends TextureProgress
 
 
-var health_source: Damageable
+var health_source: HealthComponent
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# warning-ignore-all:return_value_discarded
-	health_source = GlobalFuncs.yield_and_get_group(\"Player\")[0].get_node(\"Damageable\")
+	health_source = GlobalFuncs.yield_and_get_group(\"Player\")[0].get_node(\"HealthComponent\")
 	health_source.connect(\"healed\", self, \"update_progress\")
 	health_source.connect(\"damaged\", self, \"update_progress\")
 	update_progress(null)
@@ -31,12 +31,7 @@ func update_progress(_value) -> void:
 script/source = "extends TextureProgress
 
 
-var stamina_source: MovementInput2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	stamina_source = GlobalFuncs.yield_and_get_group(\"Player\")[0].get_node(\"MovementInput2D\")
+onready var stamina_source = GlobalFuncs.yield_and_get_group(\"Player\")[0]
 
 
 func _process(_delta) -> void:

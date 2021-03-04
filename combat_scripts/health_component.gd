@@ -1,5 +1,5 @@
 # Adds health functionality to the parent
-class_name Damageable
+class_name HealthComponent
 extends Node
 
 

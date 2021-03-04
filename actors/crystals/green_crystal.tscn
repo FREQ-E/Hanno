@@ -7,7 +7,7 @@ script/source = "extends CrystalBody
 
 
 func _handle_player_entered() -> void:
-		player.get_node(\"Damageable\").health += value
+		player.health_component.health += value
 "
 
 [sub_resource type="RectangleShape2D" id=2]

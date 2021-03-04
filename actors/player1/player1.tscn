@@ -1,7 +1,5 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://actors/base_scripts/character2d.gd" type="Script" id=1]
-[ext_resource path="res://actors/base_scripts/movement_input_2d.gd" type="Script" id=2]
 [ext_resource path="res://actors/player1/player shooting sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://actors/player1/Side-Sheet.png" type="Texture" id=4]
 [ext_resource path="res://actors/character_animator.gd" type="Script" id=5]
@@ -9,7 +7,6 @@
 [ext_resource path="res://actors/player1/Back-Sheet.png" type="Texture" id=7]
 [ext_resource path="res://actors/ui1/ui1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://actors/player1/player_shooting.gd" type="Script" id=9]
-[ext_resource path="res://actors/player1/crystal_manager.gd" type="Script" id=10]
 [ext_resource path="res://actors/player1/local_spawner.gd" type="Script" id=11]
 [ext_resource path="res://actors/crystals/green_crystal.tscn" type="PackedScene" id=12]
 [ext_resource path="res://actors/crystals/blue_crystal.tscn" type="PackedScene" id=13]
@@ -38,77 +35,210 @@ resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/invert = false
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 32, 32 )
+[sub_resource type="GDScript" id=3]
+script/source = "extends Character2D
+
+
+signal dashed
+signal undashed
+
+export var default_speed := 770.0
+
+export var max_stamina := 5.0
+export var stamina_regen_rate := 0.5
+export var stamina_regen_delay := 1.0
+export var dash_stamina_usage := 1.0
+
+export var fast_speed := 1170.0
+export var dash_speed := 2000.0					# the speed the character travels during the dash
+export var dash_duration := 0.1					# how long the dash lasts
+export var dash_buffer := 0.2					# the window of time available in which sprint can be pressed and released to trigger the dash
+
+export var crystals: int
+
+var basis_node: Node2D
+var dashing := false setget set_dashing			# if true, the character will dash until an obstacle is hit (or if triggered through sprint, will self disable after dash_duration)
+var sprinting := false
+var damage_buff := 1.0
+var buff_timer: float
+
+var _last_sprint_time_msecs: int				# the system time the last time the sprint button was pressed
+var _last_walk_time_msecs: int					# the system time the last time the sprint button was pressed
+
+onready var stamina := max_stamina setget set_stamina
+
+onready var animator: CharacterAnimator = $CharacterAnimator
+onready var shooting: Shooter = $Shooter
+onready var health_component: HealthComponent = $HealthComponent
+onready var local_spawner: LocalSpawner = $LocalSpawner
+onready var dynamic_ysort: DynamicYSort = $DynamicYSort
+
+
+func set_stamina(value: float) -> void:
+	if value > max_stamina:
+		stamina = max_stamina
+	
+	else:
+		stamina = value
+
+
+func set_dashing(value: bool) -> void:
+	if value != dashing:
+		if value:
+			movement_vector = movement_vector.normalized() * dash_speed
+			emit_signal(\"dashed\")
+		
+		else:
+			movement_vector = movement_vector.normalized() * default_speed
+			emit_signal(\"undashed\")
+		
+		linear_velocity = movement_vector		# hard set the value for sharper velocity changes
+		dashing = value
+
+
+func _ready():
+	local_spawner.initialise_spawning(global_transform.origin)
+
+
+func _input(event):
+	if event.is_action_pressed(\"sprint\"):
+		_last_sprint_time_msecs = OS.get_system_time_msecs()
+		if stamina > 0:
+			sprinting = true
+	
+	elif event.is_action_released(\"sprint\"):
+		_last_walk_time_msecs = OS.get_system_time_msecs()
+		sprinting = false
+		
+		if not dashing and not is_zero_approx(movement_vector.length()) and stamina > dash_stamina_usage and (_last_walk_time_msecs - _last_sprint_time_msecs) / 1000.0 <= dash_buffer:
+			stamina -= dash_stamina_usage
+			set_dashing(true)
+			yield(get_tree().create_timer(dash_duration), \"timeout\")
+			set_dashing(false)
+
+
+func _process(delta):
+	# the following magic with movement`vector allows finer control with joystick/joypad
+	if dashing:
+		if is_on_wall():
+			set_dashing(false)
+	
+	else:
+		var x := Input.get_action_strength(\"move right\") - Input.get_action_strength(\"move left\")
+		var y := Input.get_action_strength(\"move down\") - Input.get_action_strength(\"move up\")
+		movement_vector = Vector2(x, y).normalized() * max(abs(x), abs(y))
+		
+		if sprinting:
+			movement_vector *= fast_speed
+			stamina -= delta
+			
+			if stamina <= 0:
+				stamina = 0
+				sprinting = false
+		
+		else:
+			movement_vector *= default_speed
+			
+			if stamina < max_stamina and (OS.get_system_time_msecs() - _last_walk_time_msecs) / 1000.0 >= stamina_regen_delay:
+				set_stamina(stamina + stamina_regen_rate * delta)
+	
+	var current_origin := global_transform.origin
+	animator.process_animation(delta, movement_vector, current_origin)
+	
+	if shooting.can_fire:
+		if Input.is_action_pressed(\"fire_up\"):
+			shooting.shoot(Vector2.UP, damage_buff)
+
+		elif Input.is_action_pressed(\"fire_left\"):
+			shooting.shoot(Vector2.LEFT, damage_buff)
+
+		elif Input.is_action_pressed(\"fire_down\"):
+			shooting.shoot(Vector2.DOWN, damage_buff)
+
+		elif Input.is_action_pressed(\"fire_right\"):
+			shooting.shoot(Vector2.RIGHT, damage_buff)
+	
+	local_spawner.process_spawning(current_origin)
+	z_index = dynamic_ysort.get_z_index()
+	
+	if buff_timer > 0:
+		buff_timer -= delta
+	
+	else:
+		damage_buff = 1.0
+"
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
-region = Rect2( 32, 0, 32, 32 )
+region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 4 )
-region = Rect2( 64, 0, 32, 32 )
+region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 6 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 6 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
 region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 7 )
+region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 7 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 7 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 7 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=15]
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 6 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 6 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "walk_side",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "walk_down",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "walk_up",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "walk_down",
+"speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=16]
+[sub_resource type="CircleShape2D" id=17]
 radius = 32.9877
 
-[sub_resource type="GDScript" id=17]
-script/source = "extends Damageable
+[sub_resource type="GDScript" id=18]
+script/source = "extends HealthComponent
 
 
 func _ready():
@@ -122,7 +252,7 @@ func _input(event):
 		invincible = not invincible
 "
 
-[sub_resource type="Curve" id=18]
+[sub_resource type="Curve" id=19]
 max_value = 4.0
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 1, Vector2( 0.251986, 0 ), 0.0, 4.36139, 1, 1, Vector2( 0.952347, 3.05455 ), 4.36139, 19.8402, 1, 1, Vector2( 1, 4 ), 19.8402, 0.0, 1, 0 ]
 
@@ -131,36 +261,30 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 1, Vector2( 0.251986, 0 ), 0.0, 4.36139,
 ]]
 material = SubResource( 2 )
 collision_layer = 2
-script = ExtResource( 1 )
+script = SubResource( 3 )
 
 [node name="CharacterAnimator" type="AnimatedSprite" parent="."]
 use_parent_material = true
 position = Vector2( 0, -15.801 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 15 )
+frames = SubResource( 16 )
 animation = "walk_down"
-frame = 3
+frame = 2
 playing = true
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 16 )
+shape = SubResource( 17 )
 
-[node name="MovementInput2D" type="Node" parent="."]
-script = ExtResource( 2 )
-default_speed = 770.0
-fast_speed = 1170.0
-dash_speed = 2000.0
-
-[node name="PlayerShooting" type="Node2D" parent="."]
+[node name="Shooter" type="Node2D" parent="."]
 script = ExtResource( 9 )
 fire_rate = 0.35
 sound = ExtResource( 3 )
 
 [node name="UI1" parent="." instance=ExtResource( 8 )]
 
-[node name="Damageable" type="Node" parent="."]
-script = SubResource( 17 )
+[node name="HealthComponent" type="Node" parent="."]
+script = SubResource( 18 )
 
 [node name="Targets" type="Node2D" parent="."]
 position = Vector2( 0, -142.128 )
@@ -176,13 +300,10 @@ position = Vector2( -142.128, 142.128 )
 
 [node name="Position2D4" type="Position2D" parent="Targets"]
 
-[node name="CrystalManager" type="Node" parent="."]
-script = ExtResource( 10 )
-
 [node name="LocalSpawner" type="Node" parent="."]
 script = ExtResource( 11 )
 scenes = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ]
-probability_curve = SubResource( 18 )
+probability_curve = SubResource( 19 )
 min_distance = 1500.0
 max_distance = 2500.0
 max_instances = 15

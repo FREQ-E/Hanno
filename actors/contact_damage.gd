@@ -9,11 +9,11 @@ export var target_group := "Player"
 var _timer: float
 
 
-func _physics_process(delta):
+func process_contact_damage(delta):
 	if _timer <= 0:
 		for node in get_overlapping_bodies():
 			if node.is_in_group(target_group):
-				node.get_node("Damageable").health -= damage
+				node.health_component.health -= damage
 				_timer = damage_rate
 	
 	else:

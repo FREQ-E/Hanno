@@ -13,10 +13,8 @@ export var max_instances := 10
 
 var instances: Array
 
-onready var player_origin: Vector2 = get_parent().global_transform.origin
 
-
-func _ready():
+func initialise_spawning(player_origin: Vector2):
 	var current_scene := get_tree().current_scene
 	
 	for _i in range(max_instances):
@@ -40,10 +38,9 @@ func _ready():
 		current_scene.add_child(instance)
 
 
-func _process(_delta):
-	player_origin = get_parent().global_transform.origin
-	
+func process_spawning(player_origin: Vector2):
 	var i := 0
+	
 	while i < instances.size():
 		var instance: Node2D = instances[i]
 		

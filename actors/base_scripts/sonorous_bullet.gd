@@ -10,7 +10,7 @@ func _handle_collision(body: Node) -> void:
 	queue_free()
 	
 	if body.is_in_group(target_group):
-		body.get_node('Damageable').health -= damage
+		body.health_component.health -= damage
 	
 		var sound_player := AudioStreamPlayer2D.new()
 		sound_player.transform = transform
