@@ -94,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player1/local_spawner.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "MovementInput2D",
 "language": "GDScript",
 "path": "res://actors/base_scripts/movement_input_2d.gd"
@@ -119,7 +119,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://levels/scene_tile_map.gd"
 }, {
-"base": "Reference",
+"base": "BaseBullet",
 "class": "SonorousBullet",
 "language": "GDScript",
 "path": "res://actors/base_scripts/sonorous_bullet.gd"
