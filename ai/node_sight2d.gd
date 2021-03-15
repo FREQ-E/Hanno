@@ -21,10 +21,6 @@ func _ready():
 		target = get_node(target_path)
 
 
-func get_collision_vector() -> Vector2:
-	return get_collision_point() - global_transform.origin
-
-
 func update():
 	if is_instance_valid(target):
 		if get_collider() == target:

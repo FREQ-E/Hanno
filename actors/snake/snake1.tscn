@@ -1,12 +1,8 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://actors/contact_damage.gd" type="Script" id=1]
 [ext_resource path="res://actors/character_animator.gd" type="Script" id=2]
-[ext_resource path="res://actors/base_scripts/character2d.gd" type="Script" id=3]
-[ext_resource path="res://ai/wander2d.gd" type="Script" id=4]
-[ext_resource path="res://ai/crow_goto.gd" type="Script" id=5]
-[ext_resource path="res://ai/trigger_untrigger.gd" type="Script" id=6]
-[ext_resource path="res://ai/agro2d.gd" type="Script" id=7]
+[ext_resource path="res://actors/base_scripts/enemy.gd" type="Script" id=3]
 [ext_resource path="res://actors/death_handler.gd" type="Script" id=8]
 [ext_resource path="res://actors/snake/snek_front.png" type="Texture" id=9]
 [ext_resource path="res://combat_scripts/damage_hue.gd" type="Script" id=10]
@@ -54,35 +50,35 @@ atlas = ExtResource( 15 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 9 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 9 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 16 )
+atlas = ExtResource( 9 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 16 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 16 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 16 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 16 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=15]
@@ -94,12 +90,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
-"name": "walk_up",
+"name": "walk_down",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
-"name": "walk_down",
+"name": "walk_up",
 "speed": 10.0
 } ]
 
@@ -123,7 +119,6 @@ position = Vector2( 0, -15.801 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 15 )
 animation = "walk_down"
-frame = 2
 playing = true
 script = ExtResource( 2 )
 invert_x = true
@@ -131,28 +126,10 @@ invert_x = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 16 )
 
-[node name="NodeSight" type="RayCast2D" parent="."]
+[node name="NodeSight2D" type="RayCast2D" parent="."]
 enabled = true
 collision_mask = 2148007939
 script = ExtResource( 11 )
-
-[node name="CrowGoto" type="Node" parent="."]
-script = ExtResource( 5 )
-
-[node name="WanderAgro" type="Node" parent="."]
-script = ExtResource( 6 )
-trigger_node_path = NodePath("../../Snake1/NodeSight")
-goto_path = NodePath("../../Snake1/CrowGoto")
-untrigger_behaviour_path = NodePath("../../Snake1/WanderAgro/Wander2D")
-trigger_behaviour_path = NodePath("../../Snake1/WanderAgro/Agro2D")
-
-[node name="Wander2D" type="Node" parent="WanderAgro"]
-script = ExtResource( 4 )
-
-[node name="Agro2D" type="Node" parent="WanderAgro"]
-script = ExtResource( 7 )
-min_distance = 0.0
-notice_sub_targets = false
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource( 8 )

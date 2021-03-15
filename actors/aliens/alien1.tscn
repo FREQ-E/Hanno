@@ -1,14 +1,12 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://actors/contact_damage.gd" type="Script" id=1]
 [ext_resource path="res://actors/aliens/Alien.png" type="Texture" id=2]
-[ext_resource path="res://actors/base_scripts/character2d.gd" type="Script" id=3]
-[ext_resource path="res://ai/wander2d.gd" type="Script" id=4]
-[ext_resource path="res://ai/crow_goto.gd" type="Script" id=5]
-[ext_resource path="res://ai/trigger_untrigger.gd" type="Script" id=6]
-[ext_resource path="res://ai/agro2d.gd" type="Script" id=7]
+[ext_resource path="res://actors/base_scripts/enemy.gd" type="Script" id=3]
+[ext_resource path="res://actors/shooter.gd" type="Script" id=4]
+[ext_resource path="res://actors/aliens/player_hit_sound.wav" type="AudioStream" id=5]
+[ext_resource path="res://actors/aliens/enemy_bullet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/death_handler.gd" type="Script" id=8]
-[ext_resource path="res://actors/aliens/enemy_shooting.gd" type="Script" id=9]
 [ext_resource path="res://combat_scripts/damage_hue.gd" type="Script" id=10]
 [ext_resource path="res://ai/node_sight2d.gd" type="Script" id=11]
 [ext_resource path="res://actors/spawn_flag.gd" type="Script" id=12]
@@ -58,24 +56,10 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
 
-[node name="NodeSight" type="RayCast2D" parent="."]
+[node name="NodeSight2D" type="RayCast2D" parent="."]
 enabled = true
 collision_mask = 2148007939
 script = ExtResource( 11 )
-
-[node name="CrowGoto" type="Node" parent="."]
-script = ExtResource( 5 )
-
-[node name="WanderAgro" type="Node" parent="."]
-script = ExtResource( 6 )
-goto_path = NodePath("../CrowGoto")
-
-[node name="Wander2D" type="Node" parent="WanderAgro"]
-script = ExtResource( 4 )
-
-[node name="Agro2D" type="Node" parent="WanderAgro"]
-script = ExtResource( 7 )
-min_distance = 10.0
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource( 8 )
@@ -84,8 +68,10 @@ death_scene = ExtResource( 13 )
 [node name="DamageHue" type="Node" parent="Damageable"]
 script = ExtResource( 10 )
 
-[node name="EnemyShooting" type="Node2D" parent="."]
-script = ExtResource( 9 )
+[node name="Shooter" type="Node2D" parent="."]
+script = ExtResource( 4 )
+bullet_scene = ExtResource( 6 )
+sound = ExtResource( 5 )
 
 [node name="SpawnInstance" type="Node" parent="."]
 script = ExtResource( 12 )
