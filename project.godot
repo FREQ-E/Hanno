@@ -45,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://actors/crystals/crystal_body.gd"
 }, {
 "base": "Node",
+"class": "CrystalManager",
+"language": "GDScript",
+"path": "res://actors/player1/crystal_manager.gd"
+}, {
+"base": "Node",
 "class": "DamageHue",
 "language": "GDScript",
 "path": "res://combat_scripts/damage_hue.gd"
@@ -147,6 +152,7 @@ _global_script_class_icons={
 "ContactDamage": "",
 "CrowGoto": "",
 "CrystalBody": "",
+"CrystalManager": "",
 "DamageHue": "",
 "DeathHandler": "",
 "DynamicYSort": "",

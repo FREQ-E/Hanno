@@ -7,7 +7,7 @@
 [ext_resource path="res://levels/instance_manager.gd" type="Script" id=5]
 [ext_resource path="res://actors/snake/snake1.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool invert = false;
@@ -22,12 +22,12 @@ void fragment() {
     COLOR.rgba = col.rgba;
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/invert = false
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 uniform bool invert = false;
@@ -41,33 +41,33 @@ void fragment() {
 	}
     COLOR.rgba = col.rgba;
 }"
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+shader_param/invert = false
 
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
-shader = SubResource( 4 )
+shader = SubResource( 3 )
 shader_param/invert = false
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
-shader = SubResource( 4 )
+shader = SubResource( 3 )
 shader_param/invert = false
 
 [sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
-shader = SubResource( 4 )
+shader = SubResource( 3 )
 shader_param/invert = false
 
 [sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
-shader = SubResource( 4 )
+shader = SubResource( 3 )
 shader_param/invert = false
 
-[sub_resource type="ShaderMaterial" id=9]
-resource_local_to_scene = true
-shader = SubResource( 4 )
-shader_param/invert = false
-
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
 uniform bool invert = false;
@@ -84,7 +84,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=10]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 9 )
 shader_param/invert = false
 
 [sub_resource type="RectangleShape2D" id=11]
@@ -113,27 +113,27 @@ preload_scene_path = [ "res://actors/aliens/alien1.tscn", "res://actors/snake/sn
 respawn_free_distance = 6000.0
 
 [node name="Alien1" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 312.015, 373.353 )
 
 [node name="Alien2" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 5 )
+material = SubResource( 4 )
 position = Vector2( 685.222, 1533.36 )
 
 [node name="Alien3" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 6 )
+material = SubResource( 5 )
 position = Vector2( 1487.44, 1504.77 )
 
 [node name="Alien4" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 7 )
+material = SubResource( 6 )
 position = Vector2( 291.682, 1143.18 )
 
 [node name="Alien5" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 8 )
+material = SubResource( 7 )
 position = Vector2( 1329.35, 532.69 )
 
 [node name="Alien6" parent="InstanceManager" instance=ExtResource( 3 )]
-material = SubResource( 9 )
+material = SubResource( 8 )
 position = Vector2( 1687.57, 1030.5 )
 
 [node name="Snake1" parent="InstanceManager" instance=ExtResource( 6 )]

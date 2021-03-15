@@ -81,7 +81,7 @@ min_distance = 10.0
 script = ExtResource( 8 )
 death_scene = ExtResource( 13 )
 
-[node name="DamageHue" type="Node" parent="."]
+[node name="DamageHue" type="Node" parent="Damageable"]
 script = ExtResource( 10 )
 
 [node name="EnemyShooting" type="Node2D" parent="."]

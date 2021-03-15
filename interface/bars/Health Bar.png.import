@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Stamina Bar.png-f5e27fb7569bdf5e8f371e4d94bd276a.stex"
+path="res://.import/Health Bar.png-c194a776538aa26ab5eaa8f6d40e8812.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/ui1/Stamina Bar.png"
-dest_files=[ "res://.import/Stamina Bar.png-f5e27fb7569bdf5e8f371e4d94bd276a.stex" ]
+source_file="res://interface/bars/Health Bar.png"
+dest_files=[ "res://.import/Health Bar.png-c194a776538aa26ab5eaa8f6d40e8812.stex" ]
 
 [params]
 

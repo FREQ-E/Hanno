@@ -1,11 +1,12 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
+[ext_resource path="res://actors/player1/crystal_manager.gd" type="Script" id=1]
 [ext_resource path="res://actors/player1/player shooting sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://actors/player1/Side-Sheet.png" type="Texture" id=4]
 [ext_resource path="res://actors/character_animator.gd" type="Script" id=5]
 [ext_resource path="res://actors/player1/Front-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://actors/player1/Back-Sheet.png" type="Texture" id=7]
-[ext_resource path="res://actors/ui1/ui1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://interface/ui1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://actors/player1/player_shooting.gd" type="Script" id=9]
 [ext_resource path="res://actors/player1/local_spawner.gd" type="Script" id=11]
 [ext_resource path="res://actors/crystals/green_crystal.tscn" type="PackedScene" id=12]
@@ -14,7 +15,6 @@
 [ext_resource path="res://actors/crystals/orange_crystal.tscn" type="PackedScene" id=15]
 [ext_resource path="res://actors/crystals/red_crystal.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/dynamic_ysort.gd" type="Script" id=17]
-[ext_resource path="res://interface/GUI.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -55,8 +55,6 @@ export var dash_speed := 2000.0					# the speed the character travels during the
 export var dash_duration := 0.1					# how long the dash lasts
 export var dash_buffer := 0.2					# the window of time available in which sprint can be pressed and released to trigger the dash
 
-export var crystals: int
-
 var basis_node: Node2D
 var dashing := false setget set_dashing			# if true, the character will dash until an obstacle is hit (or if triggered through sprint, will self disable after dash_duration)
 var sprinting := false
@@ -73,6 +71,7 @@ onready var shooting: Shooter = $Shooter
 onready var health_component: HealthComponent = $HealthComponent
 onready var local_spawner: LocalSpawner = $LocalSpawner
 onready var dynamic_ysort: DynamicYSort = $DynamicYSort
+onready var crystal_manager: CrystalManager = $CrystalManager
 
 
 func set_stamina(value: float) -> void:
@@ -186,35 +185,35 @@ atlas = ExtResource( 4 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 6 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 6 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 6 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 7 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 7 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 7 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=16]
@@ -226,12 +225,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
-"name": "walk_up",
+"name": "walk_down",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
-"name": "walk_down",
+"name": "walk_up",
 "speed": 10.0
 } ]
 
@@ -270,7 +269,7 @@ position = Vector2( 0, -15.801 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 16 )
 animation = "walk_down"
-frame = 2
+frame = 1
 playing = true
 script = ExtResource( 5 )
 
@@ -313,3 +312,11 @@ max_instances = 15
 position = Vector2( 0.334093, -18.3748 )
 scale = Vector2( 4.24064, 5.10927 )
 script = ExtResource( 17 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.8, 1.8 )
+smoothing_enabled = true
+
+[node name="CrystalManager" type="Node" parent="."]
+script = ExtResource( 1 )

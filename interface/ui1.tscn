@@ -1,0 +1,142 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://interface/counters/CrystalCount.tscn" type="PackedScene" id=1]
+[ext_resource path="res://interface/counters/label_bg.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Control
+
+
+var crystal_manager: CrystalManager
+
+onready var label: Label = $HBoxContainer/Counters/PurpleCounter/Number
+onready var player = GlobalFuncs.yield_and_get_group(\"Player\")[0]
+
+
+func _ready():
+	yield(get_tree(), \"idle_frame\")
+	crystal_manager = player.crystal_manager
+	crystal_manager.connect(\"crystals_changed\", self, \"update_label\")
+	update_label()
+
+
+# Update crystal counter on the GUI
+func update_label() -> void:
+	label.text = str(crystal_manager.crystals)
+"
+
+[sub_resource type="StreamTexture" id=3]
+load_path = "res://.import/Health Shell.png-fb12b7b9662aef64440376b4017c21e9.stex"
+
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/Health Bar.png-d456a8585a2c51209304ab93676c56ba.stex"
+
+[sub_resource type="GDScript" id=1]
+script/source = "# This is a built in script for the health bar
+# built in because its dead simple and doesnt need to be used elsewhere
+# max value should always be one; Change the step
+extends TextureProgress
+
+
+var health_source: HealthComponent
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# warning-ignore-all:return_value_discarded
+	health_source = GlobalFuncs.yield_and_get_group(\"Player\")[0].get_node(\"HealthComponent\")
+	health_source.connect(\"healed\", self, \"update_progress\")
+	health_source.connect(\"damaged\", self, \"update_progress\")
+	update_progress(null)
+
+
+func update_progress(_value) -> void:
+	value = health_source.health / health_source.max_health
+"
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/Stamina Bar.png-f5e27fb7569bdf5e8f371e4d94bd276a.stex"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends TextureProgress
+
+
+onready var stamina_source = GlobalFuncs.yield_and_get_group(\"Player\")[0]
+
+
+func _process(_delta) -> void:
+	value = stamina_source.stamina / stamina_source.max_stamina
+"
+
+[node name="UI1" type="CanvasLayer"]
+
+[node name="GUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
+anchor_right = 1.0
+margin_bottom = 124.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bars" type="TextureRect" parent="GUI/HBoxContainer"]
+margin_left = 413.0
+margin_right = 713.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 300, 120 )
+texture = SubResource( 3 )
+stretch_mode = 5
+
+[node name="Health" type="TextureProgress" parent="GUI/HBoxContainer/Bars"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 60.0
+margin_top = -30.0
+margin_right = 225.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+texture_progress = SubResource( 4 )
+nine_patch_stretch = true
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stamina" type="TextureProgress" parent="GUI/HBoxContainer/Bars"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 60.0
+margin_top = 10.0
+margin_right = 225.0
+margin_bottom = 30.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+texture_progress = SubResource( 5 )
+nine_patch_stretch = true
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Counters" type="VBoxContainer" parent="GUI/HBoxContainer"]
+margin_left = 717.0
+margin_right = 867.0
+margin_bottom = 124.0
+
+[node name="PurpleCounter" type="NinePatchRect" parent="GUI/HBoxContainer/Counters" instance=ExtResource( 1 )]
+margin_right = 150.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 150, 60 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

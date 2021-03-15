@@ -1,5 +1,5 @@
 class_name DeathHandler
-extends Damageable
+extends HealthComponent
 
 
 export var death_scene: PackedScene

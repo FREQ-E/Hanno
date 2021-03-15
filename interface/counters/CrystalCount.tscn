@@ -9,7 +9,7 @@ size = 55
 extra_spacing_top = 10
 font_data = ExtResource( 3 )
 
-[node name="Background" type="NinePatchRect"]
+[node name="CrystalCount" type="NinePatchRect"]
 margin_right = 150.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 150, 60 )

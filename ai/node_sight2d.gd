@@ -25,7 +25,7 @@ func get_collision_vector() -> Vector2:
 	return get_collision_point() - global_transform.origin
 
 
-func _process(_delta):
+func update():
 	if is_instance_valid(target):
 		if get_collider() == target:
 			if not target_visible:
