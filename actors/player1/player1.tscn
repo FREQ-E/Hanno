@@ -14,6 +14,7 @@
 [ext_resource path="res://actors/crystals/orange_crystal.tscn" type="PackedScene" id=15]
 [ext_resource path="res://actors/crystals/red_crystal.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/dynamic_ysort.gd" type="Script" id=17]
+[ext_resource path="res://interface/GUI.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;

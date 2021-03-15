@@ -40,17 +40,23 @@ func _process(_delta) -> void:
 
 [node name="UI1" type="CanvasLayer"]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_top = -7.62374
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 margin_right = 64.0
-margin_bottom = 32.3763
-rect_scale = Vector2( 4, 4 )
+margin_bottom = 40.0
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureProgress" type="TextureProgress" parent="TextureRect"]
+[node name="TextureProgress" type="TextureProgress" parent="HBoxContainer/TextureRect"]
 margin_left = 16.0
 margin_top = 8.0
 margin_right = 60.0
@@ -64,7 +70,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureProgress2" type="TextureProgress" parent="TextureRect"]
+[node name="TextureProgress2" type="TextureProgress" parent="HBoxContainer/TextureRect"]
 margin_left = 16.0
 margin_top = 19.0
 margin_right = 60.0
